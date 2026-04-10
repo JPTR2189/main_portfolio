@@ -318,7 +318,7 @@ const translations = {
     about: {
       title: "Sobre Mim",
       content:
-        "Com mais de 8 anos criando produtos digitais, meu trabalho equilibra pensamento estratégico e execução precisa. Formado em Design de Interação pela ESDI, passei por startups de impacto e grandes techs. Acredito que bom design é invisível, mas memorável.",
+        "Prazer, Me chamo Jean Pierre. Tenho 20 anos e moro na região metropolitona de Porto Alegre/RS. Sou apaixonado por tecnologia, música e por aprender coisas novas que me impulsionem a me desenvolver cada vez mais. Sou aluno do  Apple Developer Academy | PUCRS e possuo uma experiência de 2 anos na construção de aplicativo iOS Mobile.",
       skills: [
         "Interface Design",
         "React & TypeScript",
