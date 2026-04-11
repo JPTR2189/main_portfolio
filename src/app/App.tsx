@@ -318,7 +318,7 @@ const translations = {
     about: {
       title: "Sobre Mim",
       content:
-        "Prazer, me chamo Jean Pierre. Tenho 20 anos e moro na região metropolitana de Porto Alegre/RS. Sou apaixonado por tecnologia, música e por aprender coisas novas que me impulsionem a me desenvolver cada vez mais. Sou aluno da  Apple Developer Academy | PUCRS e possuo experiência de 2 anos na construção de aplicativos iOS.",
+        "Prazer, me chamo Jean Pierre. Tenho 20 anos e moro na região metropolitana de Porto Alegre/RS. Sou apaixonado por tecnologia, música e por aprender coisas novas que me impulsionem a me desenvolver cada vez mais. Sou aluno da  Apple Developer Academy | PUCRS e possuo experiência de 2 anos na construção de aplicativos iOS",
       skills: [
         "Interface Design",
         "React & TypeScript",
