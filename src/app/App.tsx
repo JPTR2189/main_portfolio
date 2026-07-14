@@ -24,11 +24,11 @@ import {
 } from "lucide-react";
 
 // Project Icons
-import nebulaIcon from "../assets/c923a8797bb400d90800c73d44f98a528db3fb34.png";
-import quantumIcon from "../assets/9178d559386a393b1a4ba755bc48409a3487bb51.png";
-import horizonIcon from "../assets/96614771b7cf9c5da3113a14b58209c860545b95.png";
-import stellarIcon from "../assets/51c67b8d40789472fc95cea60ca05ecf454ec961.png";
-import auroraIcon from "../assets/63b1fb1e029170e2e88ad93dfd186e9a5e9a49f8.png";
+import nebulaIcon from "../assets/coffee_overflow.png";
+import quantumIcon from "../assets/shiro.png";
+import horizonIcon from "../assets/oh_my_grill.png";
+import stellarIcon from "../assets/api_request.png";
+import auroraIcon from "../assets/concursAI.png";
 
 // Hero Profile Photo
 import heroPhoto from "../assets/photo.png";
@@ -112,9 +112,9 @@ const translations = {
           title: "Shiro.",
           subtitle: "Arcade Game",
           description:
-            "Dashboard de dados em tempo real processando 50M+ eventos diários com visualizações interativas.",
+            "Arcade clássico em que você assume o papel de um escalador em uma jornada vertical implacável.",
           detailedDescription:
-            "Plataforma de analytics em tempo real desenvolvida para processar e visualizar grandes volumes de dados. Implementa gráficos interativos customizados, filtros avançados e exportação de relatórios. A arquitetura otimizada permite análise de 50 milhões de eventos por dia com latência inferior a 100ms.",
+            "Neste arcade clássico, você assume o papel de um escalador em uma jornada vertical implacável. Com controles precisos e ritmo acelerado, o jogador deve desviar de avalanches e troncos estrategicamente posicionados para impedir seu progresso. Você é capaz de guiar nosso herói através dos perigos da neve e conquistar o topo da montanha?",
           tag: ["iOS App", "Game"],
           date: "2025",
           role: "Desenvolvedor iOS & Scrum Master",
@@ -150,11 +150,11 @@ const translations = {
         {
           id: "nebula",
           title: "Coffee Overflow",
-          subtitle: "Game",
+          subtitle: "Ritmo e Coordenação",
           description:
-            "Sistema completo com 120+ componentes, usado por equipes de produto em 3 continentes.",
+            "Uma mistura inusitada entre café, música e tecnologia, no ritmo de uma trilha sonora frenética.",
           detailedDescription:
-            "Sistema de design completo desenvolvido do zero para unificar a experiência de produto em uma empresa de tecnologia global. Inclui biblioteca de componentes React, tokens de design, documentação interativa e ferramentas de automação. O sistema é usado por mais de 200 designers e desenvolvedores em 15 times diferentes, resultando em 60% de redução no tempo de desenvolvimento de novas features.",
+            "Uma mistura inusitada entre café, música e tecnologia. O jogo coloca você no papel de um barista que deve saciar o desejo insaciável dos programadores por café, ao mesmo tempo em que equilibra a bandeja com as xícaras que caem de um globo de dança tecnológico. Tudo isso deve ser feito em sintonia com passos de dança sincronizados a uma trilha sonora frenética e animada. Mantenha o ritmo, equilibre o café e sobreviva ao \"overflow\" de pedidos!",
           tag: ["iOS App", "Game"],
           date: "2025",
           role: "Desenvolvedor iOS & Scrum Master",
@@ -190,11 +190,11 @@ const translations = {
         {
           id: "horizon",
           title: "Oh My Grill!",
-          subtitle: "Simulator Game",
+          subtitle: "Simulador de Hamburgueria",
           description:
-            "Experiência mobile-first para gestão financeira pessoal com IA, 4.8★ na App Store.",
+            "Um simulador de hamburgueria caótico e divertido onde o trabalho em equipe é a chave.",
           detailedDescription:
-            "Aplicativo mobile de gestão financeira pessoal com recursos de IA para categorização automática de gastos, previsões inteligentes e insights personalizados. Disponível para iOS e Android, com mais de 100 mil usuários ativos e avaliação média de 4.8 estrelas. A interface foi projetada para tornar a gestão financeira simples e acessível.",
+            "Um simulador de hamburgueria caótico e divertido onde o trabalho em equipe é a chave. Gerencie uma cozinha com até quatro jogadores, coordenando tarefas sob pressão: fritar batatas, preparar ingredientes e montar pedidos com precisão. Será que você e sua equipe conseguem entregar o hambúrguer perfeito antes que o tempo se esgote?",
           tag: ["iOS App", "Game"],
           date: "2025",
           role: "PO & Desenvolvedor iOS",
@@ -245,11 +245,11 @@ const translations = {
         {
           id: "stellar",
           title: "API Request",
-          subtitle: "API App",
+          subtitle: "Integração e E-commerce",
           description:
-            "Plataforma SaaS completa com analytics em tempo real e gestão de dados para empresas modernas.",
+            "Aplicativo focado na experiência de compra moderna, demonstrando o consumo de APIs externas de forma fluida.",
           detailedDescription:
-            "Dashboard completo para gestão empresarial com módulos de analytics, relatórios customizáveis e integrações com ferramentas populares. Interface intuitiva desenvolvida para escalar com o crescimento da empresa, processando milhões de transações diárias com performance otimizada.",
+            "Aplicativo focado na experiência de compra moderna, desenvolvido para demonstrar o consumo de APIs externas de forma fluida. O projeto gerencia o fluxo completo do usuário, desde a navegação em catálogos dinâmicos até funcionalidades avançadas como sistema de favoritos, persistência de dados para salvamento de itens e um checkout simulado e intuitivo.",
           tag: ["iOS App"],
           date: "2025",
           role: "Desenvolvedor iOS",
@@ -276,11 +276,11 @@ const translations = {
         {
           id: "aurora",
           title: "ConcursAI",
-          subtitle: "Study App",
+          subtitle: "Educação e Tecnologia",
           description:
-            "Rede social moderna focada em criadores de conteúdo com ferramentas de monetização integradas.",
+            "Plataforma inteligente voltada para a otimização de estudos para concursos públicos.",
           detailedDescription:
-            "Plataforma social inovadora que conecta criadores de conteúdo com suas comunidades. Recursos incluem live streaming, marketplace integrado, sistema de assinaturas e ferramentas de analytics para creators. Mais de 500 mil usuários ativos mensalmente.",
+            "Plataforma inteligente voltada para a otimização de estudos para concursos públicos. O aplicativo resolve a dor da revisão de conteúdos extensos através da geração de quizzes personalizados, permitindo que o estudante identifique lacunas no aprendizado e reforce o conhecimento de maneira ativa e dinâmica.",
           tag: ["iOS App"],
           date: "2025",
           role: "Desenvolvedor iOS",
@@ -389,11 +389,11 @@ const translations = {
         {
           id: "quantum",
           title: "Shiro.",
-          subtitle: "Arcade Game",
+          subtitle: "Arcade Game | Ascension Challenge",
           description:
-            "Real-time data dashboard processing 50M+ daily events with interactive visualizations.",
+            "A classic arcade game where you take on the role of a climber on a relentless vertical journey.",
           detailedDescription:
-            "Real-time analytics platform developed to process and visualize large data volumes. Implements custom interactive charts, advanced filters, and report exports. The optimized architecture enables analysis of 50 million daily events with sub-100ms latency.",
+            "In this classic arcade game, you take on the role of a climber on a relentless vertical journey. With precise controls and a fast pace, the player must dodge avalanches and logs strategically placed to block their progress. Can you guide our hero through the dangers of the snow and conquer the top of the mountain?",
           tag: ["iOS App", "Game"],
           date: "2025",
           role: "iOS Developer & Scrum Master",
@@ -429,11 +429,11 @@ const translations = {
         {
           id: "nebula",
           title: "Coffee Overflow",
-          subtitle: "Game",
+          subtitle: "Rhythm & Coordination",
           description:
-            "Complete system with 120+ components, used by product teams across 3 continents.",
+            "An unusual blend of coffee, music, and technology, set to a frantic soundtrack.",
           detailedDescription:
-            "Complete design system built from scratch to unify product experience across a global tech company. Includes React component library, design tokens, interactive documentation, and automation tools. The system is used by over 200 designers and developers across 15 different teams, resulting in a 60% reduction in feature development time.",
+            "An unusual blend of coffee, music, and technology. The game puts you in the role of a barista who must satisfy programmers' insatiable craving for coffee while balancing a tray with cups falling from a techno dance globe. All of this must be done in sync with dance steps set to a frantic, upbeat soundtrack. Keep the rhythm, balance the coffee, and survive the \"overflow\" of orders!",
           tag: ["iOS App", "Game"],
           date: "2025",
           role: "iOS Developer & Scrum Master",
@@ -469,11 +469,11 @@ const translations = {
         {
           id: "horizon",
           title: "Oh My Grill!",
-          subtitle: "Simulator Game",
+          subtitle: "Burger Joint Simulator | Co-op",
           description:
-            "Mobile-first experience for personal finance management with AI, 4.8★ on App Store.",
+            "A chaotic and fun burger joint simulator where teamwork is the key.",
           detailedDescription:
-            "Personal finance management mobile app with AI-powered features for automatic expense categorization, smart predictions, and personalized insights. Available for iOS and Android, with over 100k active users and 4.8-star average rating. The interface was designed to make financial management simple and accessible.",
+            "A chaotic and fun burger joint simulator where teamwork is the key. Manage a kitchen with up to four players, coordinating tasks under pressure: frying fries, prepping ingredients, and assembling orders with precision. Can you and your team deliver the perfect burger before time runs out?",
           tag: ["iOS App", "Game"],
           date: "2025",
           role: "PO & iOS Developer",
@@ -519,11 +519,11 @@ const translations = {
         {
           id: "stellar",
           title: "API Request",
-          subtitle: "API App",
+          subtitle: "Integration & E-commerce",
           description:
-            "Complete SaaS platform with real-time analytics and data management for modern businesses.",
+            "App focused on the modern shopping experience, showcasing seamless consumption of external APIs.",
           detailedDescription:
-            "Comprehensive business management dashboard with analytics modules, customizable reports, and integrations with popular tools. Intuitive interface designed to scale with company growth, processing millions of daily transactions with optimized performance.",
+            "App focused on the modern shopping experience, built to showcase seamless consumption of external APIs. The project manages the complete user flow, from browsing dynamic catalogs to advanced features such as a favorites system, data persistence for saving items, and a simulated, intuitive checkout.",
           tag: ["iOS App"],
           date: "2025",
           role: "iOS Developer",
@@ -550,11 +550,11 @@ const translations = {
         {
           id: "aurora",
           title: "ConcursAI",
-          subtitle: "Study App",
+          subtitle: "Education & Technology (EdTech)",
           description:
-            "Modern social network focused on content creators with integrated monetization tools.",
+            "Smart platform focused on optimizing studies for public service exams.",
           detailedDescription:
-            "Innovative social platform connecting content creators with their communities. Features include live streaming, integrated marketplace, subscription system, and analytics tools for creators. Over 500k monthly active users.",
+            "Smart platform focused on optimizing studies for public service exams. The app solves the pain of reviewing extensive content through the generation of personalized quizzes, allowing students to identify learning gaps and reinforce knowledge in an active, dynamic way.",
           tag: ["iOS App"],
           date: "2025",
           role: "iOS Developer",
