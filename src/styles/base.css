@@ -1,0 +1,13 @@
+/* Accessibility: disable scroll snapping for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .scroll-snap-y-mandatory {
+    scroll-snap-type: none !important;
+  }
+}
+
+/* Softer scroll snapping on small screens */
+@media (max-width: 767px) {
+  .scroll-snap-y-mandatory {
+    scroll-snap-type: y proximity;
+  }
+}
