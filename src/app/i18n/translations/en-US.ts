@@ -8,7 +8,7 @@ export const enUS: Translation = {
   },
   hero: {
     greeting: "Hi, I'm",
-    description: "Turning ideas into apps, with full focus on the user.",
+    description: "Turning ideas into apps.",
     viewWork: "View Work",
     getInTouch: "Get in Touch",
   },

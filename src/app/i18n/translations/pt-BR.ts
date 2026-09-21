@@ -6,8 +6,7 @@ export const ptBR = {
   },
   hero: {
     greeting: "Olá, sou",
-    description:
-      "Transformando ideias em aplicativos, com foco total no usuário.",
+    description: "Transformando ideias em aplicativos.",
     viewWork: "Ver Projetos",
     getInTouch: "Entrar em Contato",
   },
