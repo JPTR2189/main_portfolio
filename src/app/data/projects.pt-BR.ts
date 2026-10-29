@@ -3,6 +3,23 @@ import { projectBases } from "./projects.shared";
 
 export const projectsPtBR: Project[] = [
   {
+    ...projectBases.clarus,
+    tags: ["App iOS"],
+    subtitle: "Estilo de Vida e Moradia",
+    description:
+      "Aplicativo focado em ajudar a conhecer e compreender uma região de Porto Alegre durante a busca por imóveis.",
+    detailedDescription:
+      "Aplicativo focado em ajudar a conhecer e compreender uma região de Porto Alegre durante a busca por imóveis. O Clarus resolve a dor de interpretar dados públicos técnicos e dispersos, reunindo em um só lugar os setores de risco mapeados pelo Serviço Geológico do Brasil, serviços próximos (unidades de saúde, escolas e mercados) e explicações acessíveis geradas por IA no próprio aparelho, sempre deixando claras as fontes e limitações de cada informação.",
+    role: "Desenvolvedor iOS",
+    skills: [
+      "Desenvolvimento iOS",
+      "Mapas e Geolocalização",
+      "Integração de APIs",
+      "Design de UI/UX",
+    ],
+    team: [{ name: "Jean Pierre", role: "Desenvolvedor iOS" }],
+  },
+  {
     ...projectBases.portalRunes,
     tags: ["Vision Pro", "Realidade Mista"],
     subtitle: "Experiência Imersiva para Apple Vision Pro",

@@ -6,6 +6,7 @@ import ohMyGrillIcon from "@/assets/oh_my_grill.png";
 import apiRequestIcon from "@/assets/api_request.png";
 import concursAiIcon from "@/assets/concursAI.png";
 import portalRunesIcon from "@/assets/portal_runes.png";
+import clarusIcon from "@/assets/clarus.png";
 
 /**
  * Language-independent fields of each project (links, colors, stack, assets).
@@ -24,6 +25,21 @@ export type ProjectBase = Omit<
 >;
 
 export const projectBases = {
+  clarus: {
+    id: "clarus",
+    title: "Clarus",
+    date: "2026",
+    technologies: ["SwiftUI", "MapKit", "Foundation Models", "Core Location"],
+    storeLinks: [
+      {
+        platform: "App Store",
+        url: "https://apps.apple.com/br/app/clarus-explorar-%C3%A9-a-chave/id6796148867",
+      },
+    ],
+    screenshots: [],
+    icon: clarusIcon,
+    accentColor: "#06B6D4",
+  },
   portalRunes: {
     id: "portal-runes",
     title: "Portal Runes",
