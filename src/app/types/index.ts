@@ -30,6 +30,11 @@ export interface Project {
   githubUrl?: string;
   team: TeamMember[];
   screenshots?: string[];
+  /** Muted, looping screen recording shown in an iPhone frame ahead of the screenshots. */
+  demo?: {
+    video: string;
+    poster: string;
+  };
   icon: string;
   accentColor: string;
   /** Keeps the project's data but leaves it out of the portfolio. */

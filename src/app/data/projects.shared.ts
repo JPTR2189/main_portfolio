@@ -9,6 +9,8 @@ import portalRunesIcon from "@/assets/portal_runes.png";
 import clarusIcon from "@/assets/clarus.png";
 import freelaOnTapIcon from "@/assets/freela_ontap.png";
 import freelaOnTapBusinessIcon from "@/assets/freela_ontap_business.png";
+import coffeeOverflowDemo from "@/assets/projects/coffee-overflow/demo.mp4";
+import coffeeOverflowDemoPoster from "@/assets/projects/coffee-overflow/demo-poster.webp";
 
 /**
  * Language-independent fields of each project (links, colors, stack, assets).
@@ -25,6 +27,21 @@ export type ProjectBase = Omit<
   | "team"
   | "tags"
 >;
+
+// App Store screenshots live in `src/assets/projects/<project id>/` as numbered files
+// (`01.webp`, `02.webp`…), shown in file-name order. Other files there, like a demo's
+// poster, are left out by the leading digit.
+const screenshotFiles = import.meta.glob<string>("../../assets/projects/*/[0-9]*.webp", {
+  eager: true,
+  import: "default",
+});
+
+function screenshotsOf(projectId: string): string[] {
+  return Object.keys(screenshotFiles)
+    .filter((path) => path.includes(`/projects/${projectId}/`))
+    .sort()
+    .map((path) => screenshotFiles[path]);
+}
 
 export const projectBases = {
   freelaOnTap: {
@@ -52,7 +69,7 @@ export const projectBases = {
         icon: freelaOnTapBusinessIcon,
       },
     ],
-    screenshots: [],
+    screenshots: screenshotsOf("freela-ontap"),
     icon: freelaOnTapIcon,
     accentColor: "#F25C1F",
     secondary: {
@@ -72,7 +89,7 @@ export const projectBases = {
         url: "https://apps.apple.com/br/app/clarus-explorar-%C3%A9-a-chave/id6796148867",
       },
     ],
-    screenshots: [],
+    screenshots: screenshotsOf("clarus"),
     icon: clarusIcon,
     accentColor: "#06B6D4",
   },
@@ -102,7 +119,7 @@ export const projectBases = {
         url: "https://apps.apple.com/br/app/shiro/id6752502968",
       },
     ],
-    screenshots: [],
+    screenshots: screenshotsOf("shiro"),
     icon: shiroIcon,
     accentColor: "#FACC15",
   },
@@ -117,7 +134,8 @@ export const projectBases = {
         url: "https://apps.apple.com/br/app/coffee-overflow-neon-rhythm/id6760731874",
       },
     ],
-    screenshots: [],
+    screenshots: screenshotsOf("coffee-overflow"),
+    demo: { video: coffeeOverflowDemo, poster: coffeeOverflowDemoPoster },
     icon: coffeeOverflowIcon,
     accentColor: "#A855F7",
   },
@@ -132,7 +150,7 @@ export const projectBases = {
         url: "https://apps.apple.com/br/app/oh-my-grill/id6756377473?l=en-GB",
       },
     ],
-    screenshots: [],
+    screenshots: screenshotsOf("oh-my-grill"),
     icon: ohMyGrillIcon,
     accentColor: "#EF4444",
   },
@@ -158,7 +176,7 @@ export const projectBases = {
         url: "https://apps.apple.com/br/app/concursai/id6747597258",
       },
     ],
-    screenshots: [],
+    screenshots: screenshotsOf("concursai"),
     icon: concursAiIcon,
     accentColor: "#10B981",
   },

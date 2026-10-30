@@ -9,6 +9,7 @@ import { Chip } from "../common/Chip";
 import { RoleTag } from "../common/RoleTag";
 import { TagLabel } from "../common/TagLabel";
 import { ProjectTitle, gradientRingStyle } from "./ProjectTitle";
+import { DemoPhone } from "./DemoPhone";
 
 import appStoreBadge from "@/assets/app_store_badge.png";
 import githubIcon from "@/assets/github.png";
@@ -121,6 +122,45 @@ function ProjectLinkBadge({ project }: { project: Project }) {
   return null;
 }
 
+/**
+ * Horizontal strip of the project's App Store screenshots, shown as published.
+ * Capped height and width keep each shot's ratio, so portrait and landscape share the row
+ * with similar visual weight.
+ * The strip bleeds into the panel padding so it scrolls edge to edge.
+ */
+function ProjectScreenshots({ project }: { project: Project }) {
+  const { t } = useLanguage();
+
+  const screenshots = project.screenshots ?? [];
+  if (screenshots.length === 0 && !project.demo) {
+    return null;
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 0.33, duration: 0.5, ease: PREMIUM_EASE }}
+      className="mb-8"
+    >
+      <SectionLabel>{t.projects.screenshots}</SectionLabel>
+      <div className="-mx-10 lg:-mx-12 px-10 lg:px-12 scroll-px-10 lg:scroll-px-12 flex items-center gap-4 overflow-x-auto snap-x snap-mandatory pb-3">
+        <DemoPhone project={project} />
+        {screenshots.map((screenshot, index) => (
+          <img
+            key={screenshot}
+            src={screenshot}
+            alt={`${project.title} — ${t.projects.screenshots} ${index + 1}`}
+            loading="lazy"
+            decoding="async"
+            className="max-h-72 lg:max-h-[440px] max-w-[85vw] lg:max-w-[600px] w-auto h-auto shrink-0 snap-start rounded-2xl border border-[#262626]"
+          />
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
 /** Expanded details (description, roles, stack, skills and team) of the active project. */
 export function ProjectDetailPanel({ project }: { project: Project }) {
   const { t } = useLanguage();
@@ -222,6 +262,8 @@ export function ProjectDetailPanel({ project }: { project: Project }) {
       >
         {project.detailedDescription}
       </motion.p>
+
+      <ProjectScreenshots project={project} />
 
       {/* My Role */}
       <motion.div
