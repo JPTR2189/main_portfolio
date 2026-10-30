@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "motion/react";
 import { ExternalLink } from "lucide-react";
 import type { Project } from "../../types";
@@ -7,6 +8,7 @@ import { splitRoles } from "../../utils/splitRoles";
 import { Chip } from "../common/Chip";
 import { RoleTag } from "../common/RoleTag";
 import { TagLabel } from "../common/TagLabel";
+import { ProjectTitle, gradientRingStyle } from "./ProjectTitle";
 
 import appStoreBadge from "@/assets/app_store_badge.png";
 import githubIcon from "@/assets/github.png";
@@ -50,6 +52,50 @@ function ProjectLinkBadge({ project }: { project: Project }) {
     );
   }
 
+  // Projects made of several apps get one labeled badge per app, side by side.
+  // Out of the absolute corner on small screens so the pair doesn't cover the title.
+  if (project.storeLinks && project.storeLinks.length > 1) {
+    return (
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.1, duration: 0.4, ease: PREMIUM_EASE }}
+        className="flex gap-4 mb-6 lg:mb-0 lg:absolute lg:top-8 lg:right-8 z-20"
+      >
+        {project.storeLinks.map((link) => (
+          <a
+            key={link.url}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(event) => event.stopPropagation()}
+            className="flex flex-col items-start gap-2 w-32 lg:w-36 hover:opacity-80 transition-opacity duration-200"
+          >
+            {link.label && (
+              // The badge PNG has a 3px black edge (of 360px) that vanishes on the dark
+              // panel, so the label is inset by that share to reach the white, plus 2px
+              // so it reads as aligned past the badge's rounded corner.
+              <span
+                className="flex items-center gap-2 text-xs text-[#A3A3A3]"
+                style={{ paddingLeft: "calc(100% * 3 / 360 + 2px)" }}
+              >
+                {link.icon && (
+                  <img src={link.icon} alt="" className="w-5 h-5 rounded-[22%]" />
+                )}
+                {link.label}
+              </span>
+            )}
+            <img
+              src={appStoreBadge}
+              alt={`${t.a11y.appStoreBadgeAlt}${link.label ? ` — ${link.label}` : ""}`}
+              className="w-full h-auto object-contain"
+            />
+          </a>
+        ))}
+      </motion.div>
+    );
+  }
+
   if (project.storeLinks && project.storeLinks.length > 0) {
     return (
       <motion.a
@@ -78,6 +124,7 @@ function ProjectLinkBadge({ project }: { project: Project }) {
 /** Expanded details (description, roles, stack, skills and team) of the active project. */
 export function ProjectDetailPanel({ project }: { project: Project }) {
   const { t } = useLanguage();
+  const [titleHovered, setTitleHovered] = useState(false);
 
   // Later sections wait for the staggered items of the previous ones.
   const techStaggerTotal = project.technologies.length * STAGGER_DELAY;
@@ -95,12 +142,22 @@ export function ProjectDetailPanel({ project }: { project: Project }) {
       className="relative p-10 lg:p-12 rounded-3xl bg-[#111111] border transition-all duration-500 group"
       style={{ borderColor: "#262626" }}
       onMouseEnter={(event) => {
-        event.currentTarget.style.borderColor = project.accentColor;
+        // Two-app projects show the gradient ring below instead of a solid border.
+        event.currentTarget.style.borderColor = project.secondary
+          ? "transparent"
+          : project.accentColor;
       }}
       onMouseLeave={(event) => {
         event.currentTarget.style.borderColor = "#262626";
       }}
     >
+      {project.secondary && (
+        <div
+          className="absolute -inset-px rounded-3xl p-px pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+          style={gradientRingStyle(project)}
+        />
+      )}
+
       <ProjectLinkBadge project={project} />
 
       {/* Header */}
@@ -136,12 +193,14 @@ export function ProjectDetailPanel({ project }: { project: Project }) {
             style={{ fontWeight: 600 }}
             onMouseEnter={(event) => {
               event.currentTarget.style.color = project.accentColor;
+              setTitleHovered(true);
             }}
             onMouseLeave={(event) => {
               event.currentTarget.style.color = "#F5F5F5";
+              setTitleHovered(false);
             }}
           >
-            {project.title}
+            <ProjectTitle project={project} highlighted={titleHovered} />
           </motion.h3>
           <motion.p
             initial={{ opacity: 0, x: -10 }}

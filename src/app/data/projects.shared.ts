@@ -7,6 +7,8 @@ import apiRequestIcon from "@/assets/api_request.png";
 import concursAiIcon from "@/assets/concursAI.png";
 import portalRunesIcon from "@/assets/portal_runes.png";
 import clarusIcon from "@/assets/clarus.png";
+import freelaOnTapIcon from "@/assets/freela_ontap.png";
+import freelaOnTapBusinessIcon from "@/assets/freela_ontap_business.png";
 
 /**
  * Language-independent fields of each project (links, colors, stack, assets).
@@ -25,6 +27,40 @@ export type ProjectBase = Omit<
 >;
 
 export const projectBases = {
+  freelaOnTap: {
+    id: "freela-ontap",
+    title: "Freela onTap",
+    date: "2026",
+    technologies: [
+      "SwiftUI",
+      "Supabase",
+      "StoreKit",
+      "MapKit",
+      "Foundation Models",
+      "Core AI",
+    ],
+    // Labels are localized in each language file.
+    storeLinks: [
+      {
+        platform: "App Store",
+        url: "https://apps.apple.com/br/app/freela-ontap-vagas-e-turnos/id6818288726",
+        icon: freelaOnTapIcon,
+      },
+      {
+        platform: "App Store",
+        url: "https://apps.apple.com/br/app/freela-ontap-empresas/id6818285624",
+        icon: freelaOnTapBusinessIcon,
+      },
+    ],
+    screenshots: [],
+    icon: freelaOnTapIcon,
+    accentColor: "#F25C1F",
+    secondary: {
+      icon: freelaOnTapBusinessIcon,
+      accentColor: "#4A74F0",
+      titlePart: "onTap",
+    },
+  },
   clarus: {
     id: "clarus",
     title: "Clarus",
@@ -109,6 +145,7 @@ export const projectBases = {
     screenshots: [],
     icon: apiRequestIcon,
     accentColor: "#3B82F6",
+    hidden: true,
   },
   concursAi: {
     id: "concursai",

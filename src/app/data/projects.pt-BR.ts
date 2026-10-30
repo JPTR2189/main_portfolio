@@ -3,6 +3,34 @@ import { projectBases } from "./projects.shared";
 
 export const projectsPtBR: Project[] = [
   {
+    ...projectBases.freelaOnTap,
+    storeLinks: [
+      { ...projectBases.freelaOnTap.storeLinks[0], label: "Para freelancers" },
+      { ...projectBases.freelaOnTap.storeLinks[1], label: "Para empresas" },
+    ],
+    tags: ["App iOS"],
+    subtitle: "Marketplace e Hospitalidade",
+    description:
+      "Marketplace que conecta freelancers a bares, restaurantes, hotéis e casas de eventos de Porto Alegre para turnos avulsos.",
+    detailedDescription:
+      "Marketplace que conecta freelancers a bares, restaurantes, hotéis e casas de eventos de Porto Alegre para turnos avulsos. O Freela onTap resolve a dor de encontrar reforço de equipe em cima da hora através de dois apps: um para freelancers explorarem vagas próximas e se candidatarem em poucos toques, e outro para empresas publicarem turnos e acompanharem as candidaturas em tempo real, com chat entre as partes e créditos para destacar vagas.",
+    role: "Desenvolvedor iOS",
+    skills: [
+      "Desenvolvimento iOS",
+      "Arquitetura MVVM",
+      "Back-end",
+      "Supabase",
+      "Git Flow",
+      "Scrum",
+    ],
+    team: [
+      { name: "Jean Pierre", role: "Desenvolvedor iOS" },
+      { name: "Vinicius Cadore", role: "Designer de UI/UX" },
+      { name: "Gabriel Kowaleski", role: "Desenvolvedor iOS" },
+      { name: "Anthony Antonelli Andrade", role: "Desenvolvedor iOS" },
+    ],
+  },
+  {
     ...projectBases.clarus,
     tags: ["App iOS"],
     subtitle: "Estilo de Vida e Moradia",
@@ -16,6 +44,7 @@ export const projectsPtBR: Project[] = [
       "Mapas e Geolocalização",
       "Integração de APIs",
       "Design de UI/UX",
+      "Git",
     ],
     team: [{ name: "Jean Pierre", role: "Desenvolvedor iOS" }],
   },
@@ -33,6 +62,8 @@ export const projectsPtBR: Project[] = [
       "Rastreamento de Mãos",
       "Áudio Espacial",
       "Modelagem 3D",
+      "Scrum",
+      "Git",
     ],
     team: [
       { name: "Jean Pierre", role: "Desenvolvedor iOS" },
@@ -56,6 +87,7 @@ export const projectsPtBR: Project[] = [
       "Otimização de Performance",
       "Scrum",
       "Liderança de Equipe",
+      "Git",
     ],
     team: [
       { name: "Jean Pierre", role: "Desenvolvedor iOS e Scrum Master" },
@@ -79,6 +111,7 @@ export const projectsPtBR: Project[] = [
       "Arquitetura de Componentes",
       "Design Systems",
       "Scrum",
+      "Git",
     ],
     team: [
       { name: "Jean Pierre", role: "Desenvolvedor iOS e Scrum Master" },
@@ -102,6 +135,8 @@ export const projectsPtBR: Project[] = [
       "Desenvolvimento iOS",
       "Design de UI/UX",
       "Design de Jogos",
+      "Scrum",
+      "Git",
     ],
     team: [
       { name: "Jean Pierre", role: "Desenvolvedor iOS e PO" },
@@ -125,6 +160,8 @@ export const projectsPtBR: Project[] = [
       "Integração de APIs",
       "Comunicação em Rede",
       "Resolução de Problemas",
+      "Scrum",
+      "Git",
     ],
     team: [
       { name: "Jean Pierre", role: "Desenvolvedor iOS" },
@@ -142,9 +179,12 @@ export const projectsPtBR: Project[] = [
     role: "Desenvolvedor iOS",
     skills: [
       "Desenvolvimento iOS",
+      "Integração de APIs",
       "Tecnologia Educacional",
       "Gerenciamento de Dados",
       "Pesquisa com Usuários",
+      "Scrum",
+      "Git",
     ],
     team: [
       { name: "Jean Pierre", role: "Desenvolvedor iOS" },

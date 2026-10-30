@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from "motion/react";
 import type { Project } from "../../types";
 import { PREMIUM_EASE } from "../../constants/animation";
+import { ProjectTitle, accentGradient, gradientRingStyle } from "./ProjectTitle";
 
 interface CardTransform {
   x: number;
@@ -48,6 +49,8 @@ interface CarouselCardProps {
 export function CarouselCard({ project, offset, onClick }: CarouselCardProps) {
   const transform = getCardTransform(offset);
   const isActive = offset === 0;
+  // Two-app projects draw their active border as a gradient overlay instead.
+  const activeBorderColor = project.secondary ? "transparent" : project.accentColor;
 
   return (
     <motion.button
@@ -59,13 +62,13 @@ export function CarouselCard({ project, offset, onClick }: CarouselCardProps) {
         opacity: transform.opacity,
         rotateY: transform.rotateY,
         zIndex: transform.zIndex,
-        borderColor: isActive ? project.accentColor : "#262626",
+        borderColor: isActive ? activeBorderColor : "#262626",
       }}
       whileHover={{
         scale: transform.visible
           ? transform.scale + (isActive ? 0 : 0.03)
           : transform.scale,
-        borderColor: isActive ? project.accentColor : "#525252",
+        borderColor: isActive ? activeBorderColor : "#525252",
       }}
       transition={{ duration: 0.7, ease: PREMIUM_EASE }}
       style={{
@@ -85,27 +88,64 @@ export function CarouselCard({ project, offset, onClick }: CarouselCardProps) {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
             className="absolute -inset-[3px] rounded-2xl -z-10 blur-xl"
-            style={{ backgroundColor: `${project.accentColor}10` }}
+            style={
+              project.secondary
+                ? { backgroundImage: accentGradient(project, "20") }
+                : { backgroundColor: `${project.accentColor}10` }
+            }
           />
         )}
       </AnimatePresence>
 
+      {/* Gradient border for two-app projects, masked down to a 2px ring */}
+      {project.secondary && (
+        <motion.div
+          className="absolute -inset-[2px] rounded-2xl p-[2px] pointer-events-none"
+          initial={false}
+          animate={{ opacity: isActive ? 1 : 0 }}
+          transition={{ duration: 0.7, ease: PREMIUM_EASE }}
+          style={gradientRingStyle(project)}
+        />
+      )}
+
       {/* Card Content */}
       <div className="relative h-full p-8 flex flex-col items-center justify-center gap-6">
-        <motion.div
-          className="relative w-32 h-32 rounded-2xl overflow-hidden"
-          animate={{
-            opacity: isActive ? 1 : 0.7,
-            scale: isActive ? 1 : 0.9,
-          }}
-          transition={{ duration: 0.6, ease: PREMIUM_EASE }}
-        >
-          <img
-            src={project.icon}
-            alt={project.title}
-            className="w-full h-full object-cover"
-          />
-        </motion.div>
+        {project.secondary ? (
+          <motion.div
+            className="relative w-[150px] h-32"
+            animate={{
+              opacity: isActive ? 1 : 0.7,
+              scale: isActive ? 1 : 0.9,
+            }}
+            transition={{ duration: 0.6, ease: PREMIUM_EASE }}
+          >
+            <img
+              src={project.secondary.icon}
+              alt=""
+              className="absolute right-0 top-0 w-[104px] h-[104px] rounded-[22%] rotate-[8deg] shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+            />
+            <img
+              src={project.icon}
+              alt={project.title}
+              className="absolute left-0 bottom-0 w-[104px] h-[104px] rounded-[22%] -rotate-6 shadow-[0_8px_24px_rgba(0,0,0,0.45)]"
+            />
+          </motion.div>
+        ) : (
+          <motion.div
+            className="relative w-32 h-32 rounded-2xl overflow-hidden"
+            animate={{
+              opacity: isActive ? 1 : 0.7,
+              scale: isActive ? 1 : 0.9,
+            }}
+            transition={{ duration: 0.6, ease: PREMIUM_EASE }}
+          >
+            <img
+              src={project.icon}
+              alt={project.title}
+              className="w-full h-full object-cover"
+            />
+          </motion.div>
+        )}
 
         <motion.h3
           className="text-xl text-center tracking-tight"
@@ -116,7 +156,7 @@ export function CarouselCard({ project, offset, onClick }: CarouselCardProps) {
           }}
           transition={{ duration: 0.5, ease: PREMIUM_EASE }}
         >
-          {project.title}
+          <ProjectTitle project={project} highlighted={isActive} />
         </motion.h3>
       </div>
     </motion.button>

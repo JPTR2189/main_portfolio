@@ -25,28 +25,45 @@ export const ptBR = {
   about: {
     title: "Sobre Mim",
     content:
-      "Prazer, me chamo Jean Pierre. Tenho 20 anos e moro na região metropolitana de Porto Alegre/RS. Sou apaixonado por tecnologia, música e por aprender coisas novas que me impulsionem a me desenvolver cada vez mais. Sou aluno da Apple Developer Academy | PUCRS e possuo experiência de 2 anos na construção de aplicativos iOS.",
+      "Prazer, me chamo Jean Pierre. Tenho 20 anos e moro na região metropolitana de Porto Alegre/RS. Sou uma pessoa comunicativa, apaixonada por tecnologia, música e por entender como as coisas funcionam. Hoje sou desenvolvedor iOS e tenho 2 anos de experiência na Apple Developer Academy | PUCRS, onde pude criar e publicar aplicativos na App Store, trabalhando em equipe e aplicando práticas alinhadas ao mercado de trabalho nos projetos. Atualmente, curso Análise e Desenvolvimento de Sistemas na PUCRS e Engenharia de Software na UNINTER. Minha curiosidade e vontade de aprender me impulsionam a novos desafios e a me aprimorar cada vez mais como futuro Engenheiro de Software. Estou animado para contribuir com minha energia e criatividade em novos times e projetos.",
   },
   skillsSection: {
     title: "Habilidades",
-    hardTitle: "Habilidades Técnicas",
-    softTitle: "Habilidades Comportamentais",
-    hardSkills: [
-      "Desenvolvimento iOS",
-      "Swift / SwiftUI",
-      "Integração de APIs",
-      "TCA",
-      "MVVM",
-      "Gerenciamento de Banco de Dados",
-    ],
-    softSkills: [
-      "Comunicação",
-      "Trabalho em equipe",
-      "Liderança",
-      "Pensamento crítico",
-      "Organização",
-      "Resolução de problemas",
-    ],
+    groups: {
+      development: {
+        title: "Desenvolvimento",
+        skills: [
+          "Desenvolvimento iOS",
+          "MVVM",
+          "TCA",
+          "MVC",
+          "Integração de APIs",
+          "Back-end",
+          "Testes de Software",
+          "Machine Learning",
+          "Análise de Dados",
+        ],
+      },
+      languages: {
+        title: "Linguagens",
+        skills: ["Swift", "Python", "Java", "JavaScript", "SQL", "Flutter"],
+      },
+      tools: {
+        title: "Ferramentas e Processos",
+        skills: ["Git", "Scrum", "Linux", "Desenvolvimento com IA"],
+      },
+      soft: {
+        title: "Comportamentais",
+        skills: [
+          "Comunicação",
+          "Trabalho em equipe",
+          "Liderança",
+          "Pensamento crítico",
+          "Organização",
+          "Resolução de problemas",
+        ],
+      },
+    },
   },
   contact: {
     title: "Vamos Conversar?",

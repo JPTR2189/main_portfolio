@@ -3,6 +3,34 @@ import { projectBases } from "./projects.shared";
 
 export const projectsEnUS: Project[] = [
   {
+    ...projectBases.freelaOnTap,
+    storeLinks: [
+      { ...projectBases.freelaOnTap.storeLinks[0], label: "For freelancers" },
+      { ...projectBases.freelaOnTap.storeLinks[1], label: "For businesses" },
+    ],
+    tags: ["iOS App"],
+    subtitle: "Marketplace & Hospitality",
+    description:
+      "Marketplace connecting freelancers with bars, restaurants, hotels, and event venues in Porto Alegre for one-off shifts.",
+    detailedDescription:
+      "Marketplace connecting freelancers with bars, restaurants, hotels, and event venues in Porto Alegre for one-off shifts. Freela onTap solves the pain of finding last-minute staff through two apps: one for freelancers to browse nearby shifts and apply in a few taps, and another for businesses to post shifts and track applications in real time, with in-app chat and credits to boost job postings.",
+    role: "iOS Developer",
+    skills: [
+      "iOS Development",
+      "MVVM Architecture",
+      "Back-end",
+      "Supabase",
+      "Git Flow",
+      "Scrum",
+    ],
+    team: [
+      { name: "Jean Pierre", role: "iOS Developer" },
+      { name: "Vinicius Cadore", role: "UI/UX Designer" },
+      { name: "Gabriel Kowaleski", role: "iOS Developer" },
+      { name: "Anthony Antonelli Andrade", role: "iOS Developer" },
+    ],
+  },
+  {
     ...projectBases.clarus,
     tags: ["iOS App"],
     subtitle: "Lifestyle & Housing",
@@ -16,6 +44,7 @@ export const projectsEnUS: Project[] = [
       "Maps & Geolocation",
       "API Integration",
       "UI/UX Design",
+      "Git",
     ],
     team: [{ name: "Jean Pierre", role: "iOS Developer" }],
   },
@@ -33,6 +62,8 @@ export const projectsEnUS: Project[] = [
       "Hand Tracking",
       "Spatial Audio",
       "3D Modeling",
+      "Scrum",
+      "Git",
     ],
     team: [
       { name: "Jean Pierre", role: "iOS Developer" },
@@ -56,6 +87,7 @@ export const projectsEnUS: Project[] = [
       "Performance Optimization",
       "Scrum",
       "Team Leadership",
+      "Git",
     ],
     team: [
       { name: "Jean Pierre", role: "iOS Developer & Scrum Master" },
@@ -79,6 +111,7 @@ export const projectsEnUS: Project[] = [
       "Component Architecture",
       "Design Systems",
       "Scrum",
+      "Git",
     ],
     team: [
       { name: "Jean Pierre", role: "iOS Developer & Scrum Master" },
@@ -102,6 +135,8 @@ export const projectsEnUS: Project[] = [
       "iOS Development",
       "UI/UX Design",
       "Game Design",
+      "Scrum",
+      "Git",
     ],
     team: [
       { name: "Jean Pierre", role: "iOS Developer & PO" },
@@ -120,7 +155,14 @@ export const projectsEnUS: Project[] = [
     detailedDescription:
       "App focused on the modern shopping experience, built to showcase seamless consumption of external APIs. The project manages the complete user flow, from browsing dynamic catalogs to advanced features such as a favorites system, data persistence for saving items, and a simulated, intuitive checkout.",
     role: "iOS Developer",
-    skills: ["iOS Development", "API Integration", "Networking", "Problem Solving"],
+    skills: [
+      "iOS Development",
+      "API Integration",
+      "Networking",
+      "Problem Solving",
+      "Scrum",
+      "Git",
+    ],
     team: [
       { name: "Jean Pierre", role: "iOS Developer" },
       { name: "Bruna Marschner", role: "iOS Developer" },
@@ -137,9 +179,12 @@ export const projectsEnUS: Project[] = [
     role: "iOS Developer",
     skills: [
       "iOS Development",
+      "API Integration",
       "Educational Technology",
       "Data Management",
       "User Research",
+      "Scrum",
+      "Git",
     ],
     team: [
       { name: "Jean Pierre", role: "iOS Developer" },

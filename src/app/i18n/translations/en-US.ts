@@ -27,28 +27,45 @@ export const enUS: Translation = {
   about: {
     title: "About Me",
     content:
-      "Nice to meet you, my name is Jean Pierre. I am 20 years old and live in the metropolitan region of Porto Alegre/RS, Brazil. I am passionate about technology, music, and learning new things that help me continuously grow. I am a student at the Apple Developer Academy | PUCRS and have 2 years of experience building iOS applications.",
+      "Nice to meet you, my name is Jean Pierre. I am 20 years old and live in the metropolitan region of Porto Alegre/RS, Brazil. I am a communicative person, passionate about technology, music, and understanding how things work. Today I am an iOS developer with 2 years of experience at the Apple Developer Academy | PUCRS, where I have built and published apps on the App Store, working in teams and applying industry-aligned practices to the projects. Currently, I study Systems Analysis and Development at PUCRS and Software Engineering at UNINTER. My curiosity and eagerness to learn drive me toward new challenges and to keep improving as a future Software Engineer. I am excited to contribute my energy and creativity to new teams and projects.",
   },
   skillsSection: {
     title: "Skills",
-    hardTitle: "Hard Skills",
-    softTitle: "Soft Skills",
-    hardSkills: [
-      "iOS Development",
-      "Swift / SwiftUI",
-      "API Integration",
-      "TCA",
-      "MVVM",
-      "Database Management",
-    ],
-    softSkills: [
-      "Communication",
-      "Teamwork",
-      "Leadership",
-      "Critical Thinking",
-      "Organization",
-      "Problem Solving",
-    ],
+    groups: {
+      development: {
+        title: "Development",
+        skills: [
+          "iOS Development",
+          "MVVM",
+          "TCA",
+          "MVC",
+          "API Integration",
+          "Back-end",
+          "Software Testing",
+          "Machine Learning",
+          "Data Analysis",
+        ],
+      },
+      languages: {
+        title: "Languages",
+        skills: ["Swift", "Python", "Java", "JavaScript", "SQL", "Flutter"],
+      },
+      tools: {
+        title: "Tools & Processes",
+        skills: ["Git", "Scrum", "Linux", "AI-Assisted Development"],
+      },
+      soft: {
+        title: "Soft Skills",
+        skills: [
+          "Communication",
+          "Teamwork",
+          "Leadership",
+          "Critical Thinking",
+          "Organization",
+          "Problem Solving",
+        ],
+      },
+    },
   },
   contact: {
     title: "Let's Talk?",
