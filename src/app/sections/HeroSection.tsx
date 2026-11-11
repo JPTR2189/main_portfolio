@@ -3,7 +3,7 @@ import { PREMIUM_EASE } from "../constants/animation";
 import { useLanguage } from "../i18n/LanguageContext";
 import { scrollToSection } from "../utils/scrollToSection";
 
-import heroPhoto from "@/assets/photo.png";
+import heroPhoto from "@/assets/photo.webp";
 
 export function HeroSection() {
   const { t } = useLanguage();

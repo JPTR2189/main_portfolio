@@ -2,7 +2,7 @@ import { motion } from "motion/react";
 import { PREMIUM_EASE } from "../constants/animation";
 import { useLanguage } from "../i18n/LanguageContext";
 
-import aboutImage from "@/assets/about.png";
+import aboutImage from "@/assets/about.webp";
 
 export function AboutSection() {
   const { t } = useLanguage();
