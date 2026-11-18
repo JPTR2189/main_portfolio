@@ -9,7 +9,7 @@ export function ProjectsSection() {
   const projects = projectsByLanguage[language];
 
   return (
-    <section id="projects" className="py-24 px-6 lg:px-12 max-w-7xl mx-auto">
+    <section id="projects" className="py-14 sm:py-24 scroll-mt-16 sm:scroll-mt-0 px-6 lg:px-12 max-w-7xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -17,7 +17,7 @@ export function ProjectsSection() {
         transition={{ duration: 0.8, ease: PREMIUM_EASE }}
       >
         <h2
-          className="text-5xl lg:text-6xl tracking-tight text-[#F5F5F5] mb-20"
+          className="text-4xl sm:text-5xl lg:text-6xl tracking-tight text-[#F5F5F5] mb-10 sm:mb-20"
           style={{ fontWeight: 600 }}
         >
           {t.projects.title}

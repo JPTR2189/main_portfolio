@@ -67,13 +67,13 @@ export function SkillsSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="py-20 lg:py-24 px-6 lg:px-12 max-w-7xl mx-auto">
+    <section className="py-14 sm:py-20 lg:py-24 px-6 lg:px-12 max-w-7xl mx-auto">
       <motion.h2
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-100px" }}
         transition={{ duration: 0.8, ease: PREMIUM_EASE }}
-        className="text-4xl lg:text-5xl tracking-tight text-[#F5F5F5] mb-12"
+        className="text-4xl lg:text-5xl tracking-tight text-[#F5F5F5] mb-8 sm:mb-12"
         style={{ fontWeight: 600 }}
       >
         {t.skillsSection.title}

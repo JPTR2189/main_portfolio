@@ -8,7 +8,7 @@ export function AboutSection() {
   const { t } = useLanguage();
 
   return (
-    <section id="about" className="py-32 px-6 lg:px-12 max-w-7xl mx-auto">
+    <section id="about" className="py-14 sm:py-32 scroll-mt-16 sm:scroll-mt-0 px-6 lg:px-12 max-w-7xl mx-auto">
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -18,7 +18,7 @@ export function AboutSection() {
       >
         <div className="lg:col-span-5">
           <h2
-            className="text-5xl lg:text-6xl tracking-tight text-[#F5F5F5] mb-8"
+            className="text-4xl sm:text-5xl lg:text-6xl tracking-tight text-[#F5F5F5] mb-6 sm:mb-8"
             style={{ fontWeight: 600 }}
           >
             {t.about.title}

@@ -14,9 +14,10 @@ interface CardTransform {
 
 /**
  * Computes position and styling for a card given its offset relative to the
- * active card. Only the active card and its immediate neighbors are visible.
+ * active card. Only the active card and its immediate neighbors are visible,
+ * `spread` pixels to each side of it.
  */
-function getCardTransform(offset: number): CardTransform {
+function getCardTransform(offset: number, spread: number): CardTransform {
   if (Math.abs(offset) > 1) {
     return {
       x: offset < 0 ? -800 : 800,
@@ -33,21 +34,23 @@ function getCardTransform(offset: number): CardTransform {
   }
 
   if (offset === -1) {
-    return { x: -340, scale: 0.85, opacity: 0.45, rotateY: 12, zIndex: 10, visible: true };
+    return { x: -spread, scale: 0.85, opacity: 0.45, rotateY: 12, zIndex: 10, visible: true };
   }
 
-  return { x: 340, scale: 0.85, opacity: 0.45, rotateY: -12, zIndex: 10, visible: true };
+  return { x: spread, scale: 0.85, opacity: 0.45, rotateY: -12, zIndex: 10, visible: true };
 }
 
 interface CarouselCardProps {
   project: Project;
   /** Signed distance from the active card (-1 = left neighbor, 0 = active, 1 = right neighbor). */
   offset: number;
+  /** Distance in pixels from the active card to each neighbor. */
+  spread: number;
   onClick?: () => void;
 }
 
-export function CarouselCard({ project, offset, onClick }: CarouselCardProps) {
-  const transform = getCardTransform(offset);
+export function CarouselCard({ project, offset, spread, onClick }: CarouselCardProps) {
+  const transform = getCardTransform(offset, spread);
   const isActive = offset === 0;
   // Two-app projects draw their active border as a gradient overlay instead.
   const activeBorderColor = project.secondary ? "transparent" : project.accentColor;

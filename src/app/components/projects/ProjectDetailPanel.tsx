@@ -40,7 +40,7 @@ function ProjectLinkBadge({ project }: { project: Project }) {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.1, duration: 0.4, ease: PREMIUM_EASE }}
         whileHover={{ scale: 1.05 }}
-        className="absolute top-6 right-6 lg:top-8 lg:right-8 z-20 inline-flex items-center gap-3.5 rounded-[10px] bg-white px-3 lg:px-3.5 py-5 h-[42px] shadow-[0_4px_12px_rgba(0,0,0,0.2)] hover:opacity-95 transition duration-200 ease-out cursor-pointer"
+        className="mb-6 sm:mb-0 sm:absolute sm:top-6 sm:right-6 lg:top-8 lg:right-8 z-20 inline-flex items-center gap-3.5 rounded-[10px] bg-white px-3 lg:px-3.5 py-5 h-[42px] shadow-[0_4px_12px_rgba(0,0,0,0.2)] hover:opacity-95 transition duration-200 ease-out cursor-pointer"
       >
         <img src={githubIcon} alt="GitHub" className="h-8 w-auto object-contain" />
         <div className="flex flex-col leading-[1.1]">
@@ -61,7 +61,7 @@ function ProjectLinkBadge({ project }: { project: Project }) {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.1, duration: 0.4, ease: PREMIUM_EASE }}
-        className="flex gap-4 mb-6 lg:mb-0 lg:absolute lg:top-8 lg:right-8 z-20"
+        className="flex gap-3 sm:gap-4 mb-6 lg:mb-0 lg:absolute lg:top-8 lg:right-8 z-20"
       >
         {project.storeLinks.map((link) => (
           <a
@@ -70,14 +70,14 @@ function ProjectLinkBadge({ project }: { project: Project }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(event) => event.stopPropagation()}
-            className="flex flex-col items-start gap-2 w-32 lg:w-36 hover:opacity-80 transition-opacity duration-200"
+            className="flex flex-col items-start gap-2 w-[120px] sm:w-32 lg:w-36 hover:opacity-80 transition-opacity duration-200"
           >
             {link.label && (
               // The badge PNG has a 3px black edge (of 360px) that vanishes on the dark
               // panel, so the label is inset by that share to reach the white, plus 2px
               // so it reads as aligned past the badge's rounded corner.
               <span
-                className="flex items-center gap-2 text-xs text-[#A3A3A3]"
+                className="flex items-center gap-2 text-xs text-[#A3A3A3] whitespace-nowrap"
                 style={{ paddingLeft: "calc(100% * 3 / 360 + 2px)" }}
               >
                 {link.icon && (
@@ -97,6 +97,7 @@ function ProjectLinkBadge({ project }: { project: Project }) {
     );
   }
 
+  // Single badges (this and GitHub) sit above the tags on phones; in the corner they would cover them.
   if (project.storeLinks && project.storeLinks.length > 0) {
     return (
       <motion.a
@@ -108,7 +109,7 @@ function ProjectLinkBadge({ project }: { project: Project }) {
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 0.1, duration: 0.4, ease: PREMIUM_EASE }}
         whileHover={{ scale: 1.05 }}
-        className="absolute top-6 right-6 lg:top-8 lg:right-8 z-20 w-32 lg:w-36 hover:opacity-80 transition-opacity duration-200"
+        className="block mb-6 sm:mb-0 sm:absolute sm:top-6 sm:right-6 lg:top-8 lg:right-8 z-20 w-32 lg:w-36 hover:opacity-80 transition-opacity duration-200"
       >
         <img
           src={appStoreBadge}
@@ -144,7 +145,7 @@ function ProjectScreenshots({ project }: { project: Project }) {
       className="mb-8"
     >
       <SectionLabel>{t.projects.screenshots}</SectionLabel>
-      <div className="-mx-10 lg:-mx-12 px-10 lg:px-12 scroll-px-10 lg:scroll-px-12 flex items-center gap-4 overflow-x-auto snap-x snap-mandatory pb-3">
+      <div className="-mx-6 sm:-mx-10 lg:-mx-12 px-6 sm:px-10 lg:px-12 scroll-px-6 sm:scroll-px-10 lg:scroll-px-12 flex items-center gap-4 overflow-x-auto snap-x snap-mandatory pb-3">
         <DemoPhone project={project} />
         {screenshots.map((screenshot, index) => (
           <img
@@ -179,7 +180,7 @@ export function ProjectDetailPanel({ project }: { project: Project }) {
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
       transition={{ duration: 0.5, ease: PREMIUM_EASE }}
-      className="relative p-10 lg:p-12 rounded-3xl bg-[#111111] border transition-all duration-500 group"
+      className="relative p-6 sm:p-10 lg:p-12 rounded-3xl bg-[#111111] border transition-all duration-500 group"
       style={{ borderColor: "#262626" }}
       onMouseEnter={(event) => {
         // Two-app projects show the gradient ring below instead of a solid border.
@@ -258,7 +259,7 @@ export function ProjectDetailPanel({ project }: { project: Project }) {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3, duration: 0.5, ease: PREMIUM_EASE }}
-        className="text-lg text-[#D4D4D4] leading-relaxed mb-8"
+        className="text-base sm:text-lg text-[#D4D4D4] leading-relaxed mb-8"
       >
         {project.detailedDescription}
       </motion.p>

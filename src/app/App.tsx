@@ -19,7 +19,7 @@ function PortfolioPage() {
   const [revealed, setRevealed] = useState(!playIntro);
 
   return (
-    <div className="min-h-screen bg-[#0A0A0A] transition-colors duration-500 relative scroll-snap-y-mandatory overflow-y-scroll">
+    <div className="min-h-screen bg-[#0A0A0A] transition-colors duration-500 relative scroll-snap-y-mandatory overflow-y-scroll overflow-x-hidden">
       <BackgroundGrid />
       {playIntro && <LumiAssistant onReveal={() => setRevealed(true)} />}
 

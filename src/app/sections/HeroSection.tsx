@@ -9,19 +9,19 @@ export function HeroSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="pt-32 pb-24 lg:pt-44 lg:pb-32 px-6 lg:px-12 max-w-7xl mx-auto relative overflow-visible">
+    <section className="pt-28 pb-14 sm:pt-32 sm:pb-24 lg:pt-44 lg:pb-32 px-6 lg:px-12 max-w-7xl mx-auto relative overflow-visible">
       {/* Decorative Elements */}
       <motion.div
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ delay: 0.5, duration: 1, ease: PREMIUM_EASE }}
-        className="absolute top-32 left-0 w-16 h-px bg-[#262626] origin-left"
+        className="absolute top-28 sm:top-32 left-0 w-16 h-px bg-[#262626] origin-left"
       />
       <motion.div
         initial={{ scaleY: 0 }}
         animate={{ scaleY: 1 }}
         transition={{ delay: 0.6, duration: 1, ease: PREMIUM_EASE }}
-        className="absolute top-32 left-0 w-px h-16 bg-[#262626] origin-top"
+        className="absolute top-28 sm:top-32 left-0 w-px h-16 bg-[#262626] origin-top"
       />
 
       <div className="relative">
@@ -92,17 +92,17 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 1.05, duration: 0.8, ease: PREMIUM_EASE }}
-              className="flex flex-wrap gap-4 mb-12"
+              className="grid gap-3 sm:flex sm:flex-wrap sm:gap-4 mb-2 sm:mb-12"
             >
               <button
                 onClick={() => scrollToSection("projects")}
-                className="px-8 py-4 bg-[#FACC15] text-[#0A0A0A] rounded-full hover:bg-[#FDE047] transition-all duration-300 font-medium"
+                className="px-5 sm:px-8 py-4 border-2 border-transparent bg-[#FACC15] text-[#0A0A0A] rounded-full hover:bg-[#FDE047] transition-all duration-300 font-medium"
               >
                 {t.hero.viewWork}
               </button>
               <button
                 onClick={() => scrollToSection("contact")}
-                className="px-8 py-4 bg-transparent border-2 border-[#262626] text-[#F5F5F5] rounded-full hover:border-[#FACC15] hover:text-[#FACC15] transition-all duration-300 font-medium"
+                className="px-5 sm:px-8 py-4 bg-transparent border-2 border-[#262626] text-[#F5F5F5] rounded-full hover:border-[#FACC15] hover:text-[#FACC15] transition-all duration-300 font-medium"
               >
                 {t.hero.getInTouch}
               </button>
