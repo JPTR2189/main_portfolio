@@ -37,6 +37,8 @@ export function AboutSection() {
           <img
             src={aboutImage}
             alt={t.a11y.aboutPhotoAlt}
+            loading="lazy"
+            decoding="async"
             className="w-full h-auto rounded-[18px] object-cover shadow-xl border border-[#262626]"
           />
         </motion.div>

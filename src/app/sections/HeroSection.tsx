@@ -121,6 +121,8 @@ export function HeroSection() {
                 <img
                   src={heroPhoto}
                   alt="Jean Pierre"
+                  // First image on screen, so the browser fetches it ahead of the others.
+                  fetchpriority="high"
                   className="w-full h-full object-cover object-center"
                 />
                 {/* Light dark overlay */}

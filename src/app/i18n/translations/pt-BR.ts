@@ -10,6 +10,25 @@ export const ptBR = {
     viewWork: "Ver Projetos",
     getInTouch: "Entrar em Contato",
   },
+  assistant: {
+    greeting: "Oi! Eu sou a Lumi, a inteligência que o Jean criou pra te apresentar o trabalho dele.",
+    runCall: "Pra te mostrar o portfólio dele, primeiro preciso compilar. Aperta o Run?",
+    run: "Run",
+    runHint: "ou aperte Enter",
+    bugCall: "Ih… um bug escapou no meio do build. Me ajuda a pegar ele antes que o Jean perceba?",
+    bugHunt: "Lá vai ele! Pega o bichinho vermelho.",
+    miss1: "Quase! Ele é mais rápido do que parece.",
+    miss2: "Esse bug é bem treinado… tenta de novo!",
+    miss3: "Ele tá cansando. Agora é a sua chance!",
+    bugCaught: "Boa! Agora vou tentar recompilar o projeto.",
+    outro: "Perfeito, tudo pronto. Compilando o portfólio…",
+    build: {
+      running: "Compilando portfólio…",
+      issue: "1 bug escapou em Portfolio.swift:42",
+      launching: "Abrindo Portfolio.app…",
+    },
+    skip: "Pular",
+  },
   projects: {
     title: "Projetos",
     viewDetails: "Ver detalhes",
@@ -74,6 +93,7 @@ export const ptBR = {
     title: "Jean Pierre — Desenvolvedor iOS",
   },
   a11y: {
+    catchBug: "Pegar o bug",
     toggleLanguage: "Alternar idioma",
     sendEmail: "Enviar e-mail",
     visitLinkedin: "Visitar perfil no LinkedIn",

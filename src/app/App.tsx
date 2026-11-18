@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { AnimatePresence } from "motion/react";
 import type { Project } from "./types";
 import { LanguageProvider } from "./i18n/LanguageContext";
 import { BackgroundGrid } from "./components/layout/BackgroundGrid";
 import { Header } from "./components/layout/Header";
+import { LumiAssistant, shouldPlayAssistantIntro } from "./components/assistant/LumiAssistant";
 import { Footer } from "./components/layout/Footer";
 import { ProjectModal } from "./components/projects/ProjectModal";
 import { HeroSection } from "./sections/HeroSection";
@@ -14,21 +15,28 @@ import { ContactSection } from "./sections/ContactSection";
 
 function PortfolioPage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
+  const [playIntro] = useState(shouldPlayAssistantIntro);
+  const [revealed, setRevealed] = useState(!playIntro);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] transition-colors duration-500 relative scroll-snap-y-mandatory overflow-y-scroll">
       <BackgroundGrid />
-      <Header />
+      {playIntro && <LumiAssistant onReveal={() => setRevealed(true)} />}
 
-      <main>
-        <HeroSection />
-        <ProjectsSection />
-        <AboutSection />
-        <SkillsSection />
-        <ContactSection />
-      </main>
+      {/* The page loads behind the intro, then remounts on reveal so its entrance animations play in view. */}
+      <Fragment key={revealed ? "revealed" : "behind-intro"}>
+        <Header />
 
-      <Footer />
+        <main>
+          <HeroSection />
+          <ProjectsSection />
+          <AboutSection />
+          <SkillsSection />
+          <ContactSection />
+        </main>
+
+        <Footer />
+      </Fragment>
 
       <AnimatePresence>
         {selectedProject && (

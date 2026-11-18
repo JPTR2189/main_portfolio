@@ -12,6 +12,25 @@ export const enUS: Translation = {
     viewWork: "View Work",
     getInTouch: "Get in Touch",
   },
+  assistant: {
+    greeting: "Hi! I'm Lumi, the intelligence Jean built to introduce you to his work.",
+    runCall: "To show you his portfolio, I need to build it first. Hit Run?",
+    run: "Run",
+    runHint: "or press Enter",
+    bugCall: "Uh-oh… a bug escaped mid-build. Can you help me catch it before Jean notices?",
+    bugHunt: "There it goes! Catch the little red one.",
+    miss1: "So close! It's faster than it looks.",
+    miss2: "This bug is well trained… try again!",
+    miss3: "It's getting tired. Now's your chance!",
+    bugCaught: "Nice! Now let me try rebuilding the project.",
+    outro: "Perfect, all set. Compiling the portfolio…",
+    build: {
+      running: "Building portfolio…",
+      issue: "1 bug escaped at Portfolio.swift:42",
+      launching: "Launching Portfolio.app…",
+    },
+    skip: "Skip",
+  },
   projects: {
     title: "Featured Projects",
     viewDetails: "View details",
@@ -76,6 +95,7 @@ export const enUS: Translation = {
     title: "Jean Pierre — iOS Developer",
   },
   a11y: {
+    catchBug: "Catch the bug",
     toggleLanguage: "Toggle language",
     sendEmail: "Send email",
     visitLinkedin: "Visit LinkedIn profile",

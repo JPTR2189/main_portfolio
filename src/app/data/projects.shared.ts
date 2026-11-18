@@ -1,14 +1,14 @@
 import type { Project } from "../types";
 
-import shiroIcon from "@/assets/shiro.png";
-import coffeeOverflowIcon from "@/assets/coffee_overflow.png";
-import ohMyGrillIcon from "@/assets/oh_my_grill.png";
-import apiRequestIcon from "@/assets/api_request.png";
-import concursAiIcon from "@/assets/concursAI.png";
-import portalRunesIcon from "@/assets/portal_runes.png";
-import clarusIcon from "@/assets/clarus.png";
-import freelaOnTapIcon from "@/assets/freela_ontap.png";
-import freelaOnTapBusinessIcon from "@/assets/freela_ontap_business.png";
+import shiroIcon from "@/assets/shiro.webp";
+import coffeeOverflowIcon from "@/assets/coffee_overflow.webp";
+import ohMyGrillIcon from "@/assets/oh_my_grill.webp";
+import apiRequestIcon from "@/assets/api_request.webp";
+import concursAiIcon from "@/assets/concursAI.webp";
+import portalRunesIcon from "@/assets/portal_runes.webp";
+import clarusIcon from "@/assets/clarus.webp";
+import freelaOnTapIcon from "@/assets/freela_ontap.webp";
+import freelaOnTapBusinessIcon from "@/assets/freela_ontap_business.webp";
 import coffeeOverflowDemo from "@/assets/projects/coffee-overflow/demo.mp4";
 import coffeeOverflowDemoPoster from "@/assets/projects/coffee-overflow/demo-poster.webp";
 
