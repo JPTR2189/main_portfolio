@@ -13,7 +13,7 @@ export const projectsPtBR: Project[] = [
     description:
       "Marketplace que conecta freelancers a bares, restaurantes, hotéis e casas de eventos de Porto Alegre para turnos avulsos.",
     detailedDescription:
-      "Marketplace que conecta freelancers a bares, restaurantes, hotéis e casas de eventos de Porto Alegre para turnos avulsos. O Freela onTap resolve a dor de encontrar reforço de equipe em cima da hora através de dois apps: um para freelancers explorarem vagas próximas e se candidatarem em poucos toques, e outro para empresas publicarem turnos e acompanharem as candidaturas em tempo real, com chat entre as partes e créditos para destacar vagas.",
+      "Marketplace que conecta freelancers a bares, restaurantes, hotéis e casas de eventos de Porto Alegre para turnos avulsos. O Freela onTap resolve a dor de encontrar reforço de equipe em cima da hora através de dois apps: um para freelancers explorarem vagas próximas e se candidatarem em poucos toques, e outro para empresas publicarem turnos e acompanharem as candidaturas em tempo real, com chat entre as partes e créditos para destacar vagas. Todo o projeto foi construído 100% com a metodologia AI First.",
     role: "Desenvolvedor iOS",
     skills: [
       "Desenvolvimento iOS",

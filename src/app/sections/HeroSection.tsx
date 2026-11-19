@@ -15,13 +15,13 @@ export function HeroSection() {
         initial={{ scaleX: 0 }}
         animate={{ scaleX: 1 }}
         transition={{ delay: 0.5, duration: 1, ease: PREMIUM_EASE }}
-        className="absolute top-28 sm:top-32 left-0 w-16 h-px bg-[#262626] origin-left"
+        className="absolute top-[88px] sm:top-[104px] lg:top-32 left-0 w-16 h-px bg-[#262626] origin-left"
       />
       <motion.div
         initial={{ scaleY: 0 }}
         animate={{ scaleY: 1 }}
         transition={{ delay: 0.6, duration: 1, ease: PREMIUM_EASE }}
-        className="absolute top-28 sm:top-32 left-0 w-px h-16 bg-[#262626] origin-top"
+        className="absolute top-[88px] sm:top-[104px] lg:top-32 left-0 w-px h-16 bg-[#262626] origin-top"
       />
 
       <div className="relative">

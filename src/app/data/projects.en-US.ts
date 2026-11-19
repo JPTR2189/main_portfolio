@@ -13,7 +13,7 @@ export const projectsEnUS: Project[] = [
     description:
       "Marketplace connecting freelancers with bars, restaurants, hotels, and event venues in Porto Alegre for one-off shifts.",
     detailedDescription:
-      "Marketplace connecting freelancers with bars, restaurants, hotels, and event venues in Porto Alegre for one-off shifts. Freela onTap solves the pain of finding last-minute staff through two apps: one for freelancers to browse nearby shifts and apply in a few taps, and another for businesses to post shifts and track applications in real time, with in-app chat and credits to boost job postings.",
+      "Marketplace connecting freelancers with bars, restaurants, hotels, and event venues in Porto Alegre for one-off shifts. Freela onTap solves the pain of finding last-minute staff through two apps: one for freelancers to browse nearby shifts and apply in a few taps, and another for businesses to post shifts and track applications in real time, with in-app chat and credits to boost job postings. The whole project was built 100% with an AI First methodology.",
     role: "iOS Developer",
     skills: [
       "iOS Development",

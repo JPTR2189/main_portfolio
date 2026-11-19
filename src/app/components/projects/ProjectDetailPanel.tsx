@@ -208,13 +208,13 @@ export function ProjectDetailPanel({ project }: { project: Project }) {
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.1, duration: 0.4, ease: PREMIUM_EASE }}
-            className="flex items-center gap-3 mb-4"
+            className="flex flex-wrap items-center gap-x-3 gap-y-2 mb-4"
           >
-            <div className="flex gap-2">
+            <div className="flex flex-wrap gap-2">
               {project.tags.map((tag) => (
                 <span
                   key={tag}
-                  className="inline-block px-4 py-1.5 rounded-full text-xs uppercase tracking-wider"
+                  className="inline-block px-3 sm:px-4 py-1.5 rounded-full text-xs uppercase tracking-wide sm:tracking-wider whitespace-nowrap"
                   style={{
                     backgroundColor: `${project.accentColor}10`,
                     color: project.accentColor,
