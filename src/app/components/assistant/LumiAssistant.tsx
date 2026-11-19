@@ -295,25 +295,35 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
     };
   }, [stage]);
 
-  // Each miss stays up for its reading time; until then a tap only makes the bug dodge, so a
-  // quick visitor never skips a line.
+  // Every tap on the bug counts, so it is caught by the fourth at most. A miss line stays up for
+  // its reading time: a quicker miss waits its turn, and the catch line waits for the last miss.
+  // When the last queued miss will have been read, and when the one on screen will have been.
+  const missQueueEnd = useRef(0);
   const missReadAt = useRef(0);
 
   const handleEscape = (escapes: number) => {
     const key = MISS_MESSAGES[escapes - 1];
-    setMessageKey(key);
-    missReadAt.current = Date.now() + readingTime(t.assistant[key]);
+    const now = Date.now();
+    const start = Math.max(now, missQueueEnd.current);
+    const read = readingTime(t.assistant[key]);
+    missQueueEnd.current = start + read;
+    after(start - now, () => {
+      setMessageKey(key);
+      missReadAt.current = Date.now() + read;
+    });
   };
 
   const handleCatch = () => {
+    // Drops a miss still waiting its turn; the one on screen gets read before the island moves on.
     clearTimers();
+    const hold = Math.max(0, missReadAt.current - Date.now() - CATCH_PAUSE - MOVE_TIME);
     setStage("outro");
     setBug("caught");
     setTimeout(() => setBug("gone"), 900);
-    moveTo("center", CATCH_PAUSE);
-    say("bugCaught", CATCH_PAUSE + MOVE_TIME);
+    moveTo("center", CATCH_PAUSE + hold);
+    say("bugCaught", CATCH_PAUSE + MOVE_TIME + hold);
     // Then the build picks up where it broke and succeeds.
-    after(CATCH_PAUSE + MOVE_TIME + readingTime(t.assistant.bugCaught), () => {
+    after(CATCH_PAUSE + MOVE_TIME + hold + readingTime(t.assistant.bugCaught), () => {
       setBuild({ progress: FAIL_AT, status: "running" });
       setPhase("build");
       runProgress(FAIL_AT, 100, FINISH_BUILD_TIME, () => {
@@ -360,7 +370,6 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
         <LooseBug
           onEscape={handleEscape}
           onCatch={handleCatch}
-          canProgress={() => Date.now() >= missReadAt.current}
         />
       )}
 

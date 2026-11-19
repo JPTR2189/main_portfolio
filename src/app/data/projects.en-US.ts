@@ -17,6 +17,7 @@ export const projectsEnUS: Project[] = [
     role: "iOS Developer",
     skills: [
       "iOS Development",
+      "AI-First Development",
       "MVVM Architecture",
       "Back-end",
       "Supabase",

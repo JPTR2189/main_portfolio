@@ -31,17 +31,14 @@ function escapePoint(x: number, y: number) {
 
 /**
  * A red bug that crawls around the viewport. The first `MAX_ESCAPES` clicks or taps on it
- * make it dash away (reported through `onEscape`); the next one catches it. While `canProgress`
- * says no (the last miss is still being read), a tap only makes it dodge, without counting.
+ * make it dash away (reported through `onEscape`); the next one catches it.
  */
 export function LooseBug({
   onEscape,
   onCatch,
-  canProgress,
 }: {
   onEscape: (escapes: number) => void;
   onCatch: () => void;
-  canProgress: () => boolean;
 }) {
   const { t } = useLanguage();
   const bodyRef = useRef<HTMLButtonElement>(null);
@@ -108,12 +105,6 @@ export function LooseBug({
   const handleAttempt = () => {
     const bug = state.current;
     if (bug.stopped) {
-      return;
-    }
-    if (!canProgress()) {
-      bug.target = escapePoint(bug.x, bug.y);
-      bug.speed = ESCAPE_SPEED;
-      bug.pause = 0;
       return;
     }
     if (bug.escapes < MAX_ESCAPES) {

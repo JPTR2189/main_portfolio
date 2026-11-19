@@ -17,6 +17,7 @@ export const projectsPtBR: Project[] = [
     role: "Desenvolvedor iOS",
     skills: [
       "Desenvolvimento iOS",
+      "Desenvolvimento AI First",
       "Arquitetura MVVM",
       "Back-end",
       "Supabase",
