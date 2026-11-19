@@ -23,8 +23,9 @@ const BUILD_TIME = 3200;
 const FINISH_BUILD_TIME = 1400;
 // How long "Build Failed" and "Build Succeeded" stay before the conversation goes on.
 const BUILD_RESULT_TIME = 1600;
-// Below this width the header has no room for a resting island, so it goes away.
-const RESTING_MIN_WIDTH = 640;
+// Below this width the header has no room for the island, so after the intro it docks at the bottom.
+const DOCK_BELOW_WIDTH = 640;
+const isPhone = () => window.innerWidth < DOCK_BELOW_WIDTH;
 // How long the island shows a section's name before resting again.
 const LIVE_TIME = 2400;
 
@@ -150,7 +151,7 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
 
   const rest = () => {
     clearTimers();
-    setPhase(window.innerWidth >= RESTING_MIN_WIDTH ? "resting" : "gone");
+    setPhase("resting");
   };
 
   /** Moves the build bar from `from` to `to` over `duration` ms, easing out, then calls `done`. */
@@ -201,7 +202,7 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
     setStage("done");
     setAwaitingRun(false);
     onReveal();
-    setPlacement("top");
+    setPlacement(isPhone() ? "bottom" : "top");
     setBug((current) => (current === "caught" ? current : "gone"));
     rest();
   };
@@ -247,7 +248,7 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
 
   // Once the page shows, the resting island briefly announces each section scrolled into view.
   useEffect(() => {
-    if (stage !== "done" || window.innerWidth < RESTING_MIN_WIDTH) {
+    if (stage !== "done") {
       return;
     }
     let lastLabel = "";
@@ -337,6 +338,11 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
     if (stage !== "done") {
       return;
     }
+    // On phones the docked island is a shortcut back to the top.
+    if (isPhone()) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
     if (phase === "resting" || phase === "live") {
       say("greeting");
       after(6000, rest);
@@ -352,6 +358,8 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
       <AnimatePresence>
         {phase !== "gone" && (
           <LumiIsland
+            // Docking at the bottom is a new island: the one up top leaves and this one rises from below.
+            key={placement === "bottom" ? "dock" : "island"}
             phase={phase}
             placement={placement}
             message={phase === "live" ? liveLabel : t.assistant[messageKey]}
@@ -393,13 +401,15 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
   );
 }
 
-/** The dark screen that hides the page during the intro. It leaves by folding into the top center, where the island goes. */
+/** The dark screen that hides the page during the intro. It leaves by folding into the island. */
 function IntroBackdrop() {
+  // Folds toward where the island will rest: the top, or the bottom on phones.
+  const origin = isPhone() ? "50% 100%" : "50% 0%";
   return (
     <motion.div
       aria-hidden="true"
-      initial={{ clipPath: "circle(150% at 50% 0%)" }}
-      exit={{ clipPath: "circle(0% at 50% 0%)", transition: { duration: 1, ease: PREMIUM_EASE } }}
+      initial={{ clipPath: `circle(150% at ${origin})` }}
+      exit={{ clipPath: `circle(0% at ${origin})`, transition: { duration: 1, ease: PREMIUM_EASE } }}
       className="fixed inset-0 z-[55] bg-[#0A0A0A]"
     />
   );

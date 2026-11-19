@@ -36,6 +36,11 @@ function PortfolioPage() {
         </main>
 
         <Footer />
+
+        {/* On phones the island docks at the bottom; this room lets the footer clear it. */}
+        {playIntro && (
+          <div aria-hidden="true" className="sm:hidden" style={{ height: "calc(84px + env(safe-area-inset-bottom))" }} />
+        )}
       </Fragment>
 
       <AnimatePresence>

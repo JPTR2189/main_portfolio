@@ -21,8 +21,8 @@ export type BuildState = { progress: number; status: "running" | "failed" | "suc
 /** A button shown under a message, like "Run". */
 export type IslandAction = { label: string; hint: string; onClick: () => void };
 
-/** `center` while the intro covers the page; `top` once the page shows. */
-export type IslandPlacement = "center" | "top";
+/** `center` while the intro covers the page; `top` once the page shows, or `bottom` on phones. */
+export type IslandPlacement = "center" | "top" | "bottom";
 
 // One gentle spring, like Apple's, for every move and resize so they stay in step.
 const FLUID = { type: "spring", visualDuration: 0.7, bounce: 0.15 } as const;
@@ -48,7 +48,7 @@ function speechDuration(message: string) {
  * Dynamic Island's proportions; small at the top, out of the way of the bug hunt.
  */
 function pillSize(placement: IslandPlacement) {
-  if (placement === "top") {
+  if (placement !== "center") {
     return { width: 200, height: 38 };
   }
   const width = Math.round(Math.min(340, Math.max(220, window.innerWidth * 0.3)));
@@ -129,7 +129,7 @@ function shapeOf(phase: IslandPhase, placement: IslandPlacement, contentHeight: 
         borderRadius: placement === "center" ? 32 : 26,
       };
     case "resting":
-      return { width: 126, height: 36, borderRadius: 18 };
+      return { width: placement === "bottom" ? 110 : 126, height: 36, borderRadius: 18 };
     case "live":
       return { width: liveWidth(message), height: 56, borderRadius: 26 };
   }
@@ -151,6 +151,7 @@ export function LumiIsland({
   onClick: () => void;
 }) {
   const isCenter = placement === "center";
+  const isBottom = placement === "bottom";
   const active = isCenter ? 0.6 : 0.35;
   // Strongest while it talks in the middle of the screen; faint while it rests at the top.
   const glowOpacity = { island: 0, resting: 0.15, live: 0.35, moving: active, speaking: active, build: active }[phase];
@@ -185,13 +186,15 @@ export function LumiIsland({
 
   return (
     // Positions the island: slides down from above the top edge to the middle of the screen,
-    // later rises to the top. Its top edge is what moves, so resizing never shifts it.
+    // later rises to the top. Its top edge is what moves, so resizing never shifts it. Docked at
+    // the bottom it rises from below instead and grows upward, clear of the browser bar.
     <motion.div
-      initial={{ y: -140 }}
+      initial={{ y: isBottom ? 140 : -140 }}
       animate={{ y: isCenter ? centerTop() : 0 }}
-      exit={{ y: -140, opacity: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }}
+      exit={{ y: isBottom ? 140 : -140, opacity: 0, transition: { duration: 0.4, ease: [0.22, 1, 0.36, 1] } }}
       transition={FLUID}
-      className="fixed top-0 inset-x-0 z-[60] flex justify-center pt-3 pointer-events-none"
+      className={`fixed inset-x-0 z-[60] flex justify-center pointer-events-none ${isBottom ? "bottom-0" : "top-0 pt-3"}`}
+      style={isBottom ? { paddingBottom: "calc(12px + env(safe-area-inset-bottom))" } : undefined}
     >
       <div className="relative">
         {/* Siri-like halo whose colors drift slowly. */}
