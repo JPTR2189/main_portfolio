@@ -11,6 +11,7 @@ import { HeroSection } from "./sections/HeroSection";
 import { ProjectsSection } from "./sections/ProjectsSection";
 import { AboutSection } from "./sections/AboutSection";
 import { SkillsSection } from "./sections/SkillsSection";
+import { RecommendationsSection } from "./sections/RecommendationsSection";
 import { ContactSection } from "./sections/ContactSection";
 
 function PortfolioPage() {
@@ -32,6 +33,7 @@ function PortfolioPage() {
           <ProjectsSection />
           <AboutSection />
           <SkillsSection />
+          <RecommendationsSection />
           <ContactSection />
         </main>
 

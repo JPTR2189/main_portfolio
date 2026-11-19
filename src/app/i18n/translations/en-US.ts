@@ -86,6 +86,46 @@ export const enUS: Translation = {
       },
     },
   },
+  recommendations: {
+    title: "Recommendations",
+    translatedNote: "Translated from Portuguese",
+    viewOnLinkedIn: "View on LinkedIn",
+    items: [
+      {
+        name: "Igor Vicente",
+        initials: "IV",
+        headline: "iOS Developer and Mentor at Apple Developer Academy | PUCRS",
+        relation: "Jean's mentor · Jul 2024",
+        linkedin: "https://www.linkedin.com/in/imarvic/",
+        paragraphs: [
+          "I had the opportunity to mentor Jean in the iOS Mobile Development Residency of the ICT Residency Program. From the start, Jean stood out as a very dedicated and curious student, always trying to understand the “how” and the “why” of the technologies we were exploring. He showed a positive, proactive attitude, actively collaborating with his peers and contributing to a shared learning environment.",
+          "His team's final project was a clear example of how much he grew during the course, reflecting his commitment and technical skills. Jean will certainly be a valuable addition to any development team.",
+        ],
+      },
+      {
+        name: "Diego Breidenbach Skieresz",
+        initials: "DS",
+        headline: "Full Stack Developer and Mentor",
+        relation: "Jean's teacher · Mar 2024",
+        linkedin: "https://www.linkedin.com/in/skiereszdiego/",
+        paragraphs: [
+          "I had the pleasure of having Jean as a student in the Java Web Programming track of the online course TIC em Trilhas, in partnership with Geração Caldeira. During the course, he stood out for his dedication, talent, focus, and discipline in learning Java web programming. He showed commitment to learning and care for his professional growth. He quickly mastered Java concepts, looking for innovative solutions to programming problems and showing initiative, autonomy, and critical thinking.",
+          "He is a dedicated, talented professional with great potential in the field.",
+          "Thank you for taking part, and I wish you every success in your career!",
+        ],
+      },
+      {
+        name: "Allan Pierre Rodrigues",
+        initials: "AR",
+        headline: "Commercial Manager",
+        relation: "Jean's mentor · Jul 2023",
+        linkedin: "https://www.linkedin.com/in/allan-pierre-rodrigues-70b51530/",
+        paragraphs: [
+          "I am pleased to recommend this young man as a future high-performance professional: besides being focused, disciplined, and highly reliable, he is dedicated to Information Technology and always evolving and learning. His ethical conduct, responsibility, and exemplary technical skills make him an exceptional choice for your team, and your institution will be fortunate to contribute to the education and growth of a future software engineer with a brilliant career ahead. His proactivity, leadership, problem-solving ability, and collaborative attitude make him stand out as a promising and valuable talent for any company that hires him.",
+        ],
+      },
+    ],
+  },
   contact: {
     title: "Let's Talk?",
     description: "Get in touch with me through my networks:",
@@ -96,6 +136,8 @@ export const enUS: Translation = {
   },
   a11y: {
     catchBug: "Catch the bug",
+    previousRecommendation: "Previous recommendation",
+    nextRecommendation: "Next recommendation",
     toggleLanguage: "Toggle language",
     sendEmail: "Send email",
     visitLinkedin: "Visit LinkedIn profile",
