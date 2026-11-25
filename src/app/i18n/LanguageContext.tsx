@@ -12,13 +12,28 @@ import { translations, type Translation } from "./translations";
 interface LanguageContextValue {
   language: Language;
   t: Translation;
-  toggleLanguage: () => void;
+  setLanguage: (language: Language) => void;
+}
+
+const LANGUAGE_KEY = "jp-language";
+
+/** The visitor's last choice, or else the language of their browser. */
+function initialLanguage(): Language {
+  try {
+    const saved = localStorage.getItem(LANGUAGE_KEY);
+    if (saved === "pt-BR" || saved === "en-US") {
+      return saved;
+    }
+  } catch {
+    // Storage blocked: fall back to the browser's language.
+  }
+  return navigator.language.toLowerCase().startsWith("pt") ? "pt-BR" : "en-US";
 }
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [language, setLanguage] = useState<Language>("pt-BR");
+  const [language, setLanguage] = useState<Language>(initialLanguage);
 
   // Keep the document language and tab title in sync with the active locale.
   useEffect(() => {
@@ -30,8 +45,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     () => ({
       language,
       t: translations[language],
-      toggleLanguage: () =>
-        setLanguage((previous) => (previous === "pt-BR" ? "en-US" : "pt-BR")),
+      setLanguage: (next) => {
+        setLanguage(next);
+        try {
+          localStorage.setItem(LANGUAGE_KEY, next);
+        } catch {
+          // Storage blocked: the choice lasts until the page reloads.
+        }
+      },
     }),
     [language],
   );

@@ -8,7 +8,8 @@ export const enUS: Translation = {
   },
   hero: {
     greeting: "Hi, I'm",
-    description: "Turning ideas into apps.",
+    experience: "2+ years",
+    description: "turning ideas into apps.",
     viewWork: "View Work",
     getInTouch: "Get in Touch",
   },
@@ -18,7 +19,8 @@ export const enUS: Translation = {
     run: "Run",
     runHint: "or press Enter",
     bugCall: "Oops, I found a bug along the way. Can you help catch it?",
-    bugHunt: "It got away! Catch the red bug for me.",
+    bugHunt: "It got away! Click the red bug to catch it.",
+    bugHuntTouch: "It got away! Tap the red bug to catch it.",
     miss1: "So close! It's faster than it looks.",
     miss2: "Dodged again… keep trying!",
     miss3: "It's getting tired. Now's your chance!",
@@ -45,8 +47,12 @@ export const enUS: Translation = {
   },
   about: {
     title: "About Me",
-    content:
-      "Nice to meet you, my name is Jean Pierre. I am 20 years old and live in the metropolitan region of Porto Alegre/RS, Brazil. I am a communicative person, passionate about technology, music, and understanding how things work. Today I am an iOS developer with 2 years of experience at the Apple Developer Academy | PUCRS, where I have built and published apps on the App Store, working in teams and applying industry-aligned practices to the projects. Currently, I study Systems Analysis and Development at PUCRS and Software Engineering at UNINTER. My curiosity and eagerness to learn drive me toward new challenges and to keep improving as a future Software Engineer. I am excited to contribute my energy and creativity to new teams and projects.",
+    // Text between ** is emphasized.
+    paragraphs: [
+      "Nice to meet you, my name is Jean Pierre. I am 20 years old and live in the metropolitan region of **Porto Alegre/RS, Brazil**. I am a communicative person, passionate about technology, music, and understanding how things work.",
+      "Today I am an iOS developer with more than 2 years of experience at the **Apple Developer Academy | PUCRS**, where I have built and published apps on the App Store, working in teams and applying industry-aligned practices to the projects.",
+      "Currently, I study **Systems Analysis and Development at PUCRS** and **Software Engineering at UNINTER**. My curiosity and eagerness to learn drive me toward new challenges and to keep improving as a future Software Engineer. I am excited to contribute my energy and creativity to new teams and projects.",
+    ],
   },
   skillsSection: {
     title: "Skills",
@@ -130,6 +136,9 @@ export const enUS: Translation = {
     title: "Let's Talk?",
     description: "Get in touch with me through my networks:",
     email: "developerjeanpierre@gmail.com",
+    copyEmail: "Copy email",
+    emailCopied: "Email copied",
+    copyFailed: "Couldn't copy",
   },
   meta: {
     title: "Jean Pierre — iOS Developer",
@@ -138,7 +147,10 @@ export const enUS: Translation = {
     catchBug: "Catch the bug",
     previousRecommendation: "Previous recommendation",
     nextRecommendation: "Next recommendation",
-    toggleLanguage: "Toggle language",
+    pauseRecommendations: "Pause recommendations",
+    playRecommendations: "Resume recommendations",
+    backToTop: "Back to top",
+    languageSwitch: "Site language",
     sendEmail: "Send email",
     visitLinkedin: "Visit LinkedIn profile",
     visitGithub: "Visit GitHub profile",

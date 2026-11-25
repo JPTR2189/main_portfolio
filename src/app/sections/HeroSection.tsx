@@ -35,7 +35,7 @@ export function HeroSection() {
               className="inline-flex items-center gap-2 mb-8"
             >
               <div className="w-2 h-2 rounded-full bg-[#FACC15]" />
-              <span className="text-xs uppercase tracking-[0.2em] text-[#737373]">
+              <span className="text-xs uppercase tracking-[0.2em] text-[#8C8C8C]">
                 {t.hero.greeting}
               </span>
             </motion.div>
@@ -48,16 +48,11 @@ export function HeroSection() {
               className="mb-10"
             >
               <h1
-                className="text-[clamp(3.5rem,12vw,10rem)] leading-[0.88] tracking-[-0.02em] text-[#F5F5F5] mb-2"
+                className="text-[clamp(3.5rem,12vw,10rem)] leading-[0.88] tracking-[-0.02em] text-[#F5F5F5]"
                 style={{ fontWeight: 700 }}
               >
-                Jean
-              </h1>
-              <h1
-                className="text-[clamp(3.5rem,12vw,10rem)] leading-[0.88] tracking-[-0.02em] text-[#FACC15] mb-2"
-                style={{ fontWeight: 700 }}
-              >
-                Pierre
+                <span className="block mb-2">Jean</span>{" "}
+                <span className="block mb-2 text-[#FACC15]">Pierre</span>
               </h1>
             </motion.div>
 
@@ -84,7 +79,7 @@ export function HeroSection() {
               transition={{ delay: 0.95, duration: 0.8, ease: PREMIUM_EASE }}
               className="text-base lg:text-lg text-[#A3A3A3] mb-12 max-w-lg leading-relaxed"
             >
-              {t.hero.description}
+              <span className="text-[#F5F5F5] font-semibold">{t.hero.experience}</span> {t.hero.description}
             </motion.p>
 
             {/* CTAs */}

@@ -148,7 +148,7 @@ export function LumiIsland({
   message: string;
   build: BuildState;
   action?: IslandAction;
-  onClick: () => void;
+  onClick?: () => void;
 }) {
   const isCenter = placement === "center";
   const isBottom = placement === "bottom";
@@ -213,7 +213,7 @@ export function LumiIsland({
           initial={shapeOf("island", placement, 0, message)}
           animate={shapeOf(phase, placement, contentHeight, message)}
           transition={FLUID}
-          className="relative overflow-hidden cursor-pointer pointer-events-auto shadow-[0_14px_40px_rgba(0,0,0,0.55)]"
+          className={`relative overflow-hidden ${onClick ? "cursor-pointer" : ""} ${onClick || action ? "pointer-events-auto" : ""} shadow-[0_14px_40px_rgba(0,0,0,0.55)]`}
         >
           {/* Black layer: the island itself. Fades toward the bottom when it is a card. */}
           <div
@@ -348,7 +348,7 @@ export function LumiIsland({
                               {action.label}
                             </button>
                             {/* Keyboard hint, only where there is likely a keyboard. */}
-                            <span className="hidden [@media(hover:hover)]:inline text-xs text-[#737373]">
+                            <span className="hidden [@media(hover:hover)]:inline text-xs text-[#8C8C8C]">
                               {action.hint}
                             </span>
                           </motion.div>
@@ -443,7 +443,7 @@ function BuildPanel({ build }: { build: BuildState }) {
             <span className="text-[#EF4444]">{labels.issue}</span>
           </>
         ) : (
-          <span className="text-[#737373]">{build.status === "succeeded" ? labels.launching : logLine}</span>
+          <span className="text-[#8C8C8C]">{build.status === "succeeded" ? labels.launching : logLine}</span>
         )}
       </p>
     </div>

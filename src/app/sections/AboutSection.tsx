@@ -4,6 +4,19 @@ import { useLanguage } from "../i18n/LanguageContext";
 
 import aboutImage from "@/assets/about.webp";
 
+/** Renders the text between ** as emphasis. */
+function withEmphasis(text: string) {
+  return text.split("**").map((part, index) =>
+    index % 2 === 1 ? (
+      <strong key={part} className="text-[#F5F5F5]" style={{ fontWeight: 600 }}>
+        {part}
+      </strong>
+    ) : (
+      part
+    ),
+  );
+}
+
 export function AboutSection() {
   const { t } = useLanguage();
 
@@ -23,9 +36,11 @@ export function AboutSection() {
           >
             {t.about.title}
           </h2>
-          <p className="text-lg lg:text-xl text-[#D4D4D4] leading-relaxed">
-            {t.about.content}
-          </p>
+          <div className="space-y-5 text-lg lg:text-xl text-[#D4D4D4] leading-relaxed">
+            {t.about.paragraphs.map((paragraph) => (
+              <p key={paragraph}>{withEmphasis(paragraph)}</p>
+            ))}
+          </div>
         </div>
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}

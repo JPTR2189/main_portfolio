@@ -17,12 +17,14 @@ import { ContactSection } from "./sections/ContactSection";
 function PortfolioPage() {
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [playIntro] = useState(shouldPlayAssistantIntro);
+  // Visitors who prefer reduced motion get the page without the island.
+  const [showIsland] = useState(() => !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
   const [revealed, setRevealed] = useState(!playIntro);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] transition-colors duration-500 relative scroll-snap-y-mandatory overflow-y-scroll overflow-x-hidden">
       <BackgroundGrid />
-      {playIntro && <LumiAssistant onReveal={() => setRevealed(true)} />}
+      {showIsland && <LumiAssistant playIntro={playIntro} onReveal={() => setRevealed(true)} />}
 
       {/* The page loads behind the intro, then remounts on reveal so its entrance animations play in view. */}
       <Fragment key={revealed ? "revealed" : "behind-intro"}>
@@ -39,9 +41,9 @@ function PortfolioPage() {
 
         <Footer />
 
-        {/* On phones the island docks at the bottom; this room lets the footer clear it. */}
-        {playIntro && (
-          <div aria-hidden="true" className="sm:hidden" style={{ height: "calc(84px + env(safe-area-inset-bottom))" }} />
+        {/* On narrow screens the island docks at the bottom; this room lets the footer clear it. */}
+        {showIsland && (
+          <div aria-hidden="true" className="lg:hidden" style={{ height: "calc(84px + env(safe-area-inset-bottom))" }} />
         )}
       </Fragment>
 

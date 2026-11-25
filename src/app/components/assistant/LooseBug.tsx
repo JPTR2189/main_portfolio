@@ -9,6 +9,8 @@ const WALK_SPEED = 140;
 const ESCAPE_SPEED = 680;
 // Attempts it dodges before letting itself be caught.
 export const MAX_ESCAPES = 3;
+// After this long without an attempt, in milliseconds, the ring hints again that it can be clicked.
+const HINT_AFTER = 5000;
 // Keeps it clear of the island at the top.
 const TOP_MARGIN = 110;
 const SIDE_MARGIN = 40;
@@ -53,6 +55,16 @@ export function LooseBug({
     stopped: false,
   });
   const [caughtAt, setCaughtAt] = useState<{ x: number; y: number } | null>(null);
+  const [hinting, setHinting] = useState(true);
+  const [escapes, setEscapes] = useState(0);
+
+  useEffect(() => {
+    if (hinting) {
+      return;
+    }
+    const timer = window.setTimeout(() => setHinting(true), HINT_AFTER);
+    return () => clearTimeout(timer);
+  }, [hinting, escapes]);
 
   useEffect(() => {
     let frameId = 0;
@@ -109,6 +121,8 @@ export function LooseBug({
     }
     if (bug.escapes < MAX_ESCAPES) {
       bug.escapes += 1;
+      setEscapes(bug.escapes);
+      setHinting(false);
       bug.target = escapePoint(bug.x, bug.y);
       bug.speed = ESCAPE_SPEED;
       bug.pause = 0;
@@ -133,8 +147,28 @@ export function LooseBug({
       className="fixed left-0 top-0 z-[57] w-16 h-16 flex items-center justify-center cursor-crosshair touch-none"
       style={{ transform: "translate(-60px, -60px)" }}
     >
+      {hinting && <HintRings />}
       <Bug size={34} strokeWidth={2.2} style={{ color: BUG_COLOR }} className="drop-shadow-[0_0_8px_rgba(239,68,68,0.6)]" />
     </button>
+  );
+}
+
+/** Rings pulsing out of the bug, to show that it can be clicked. */
+function HintRings() {
+  return (
+    <>
+      {[0, 0.8].map((delay) => (
+        <motion.span
+          key={delay}
+          aria-hidden="true"
+          className="absolute inset-0 rounded-full border-2 pointer-events-none"
+          style={{ borderColor: BUG_COLOR }}
+          initial={{ scale: 0.55, opacity: 0 }}
+          animate={{ scale: [0.55, 1.35], opacity: [0.9, 0] }}
+          transition={{ duration: 1.6, delay, repeat: Infinity, ease: "easeOut" }}
+        />
+      ))}
+    </>
   );
 }
 

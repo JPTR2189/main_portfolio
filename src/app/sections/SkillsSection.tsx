@@ -46,7 +46,7 @@ function SkillGroupCard({
         >
           {title}
         </h3>
-        <span className="ml-auto text-xs text-[#525252]">{skills.length}</span>
+        <span className="ml-auto text-xs text-[#8C8C8C]">{skills.length}</span>
       </div>
 
       <div className="relative flex flex-wrap gap-2">

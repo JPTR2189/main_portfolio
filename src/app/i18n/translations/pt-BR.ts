@@ -6,7 +6,8 @@ export const ptBR = {
   },
   hero: {
     greeting: "Olá, sou",
-    description: "Transformando ideias em aplicativos.",
+    experience: "+2 anos",
+    description: "transformando ideias em aplicativos.",
     viewWork: "Ver Projetos",
     getInTouch: "Entrar em Contato",
   },
@@ -16,7 +17,8 @@ export const ptBR = {
     run: "Run",
     runHint: "ou aperte Enter",
     bugCall: "Opa, encontrei um bug no caminho. Você consegue ajudar a pegar ele?",
-    bugHunt: "Ele fugiu! Pegue o bug vermelho para mim.",
+    bugHunt: "Ele fugiu! Clique no bug vermelho para pegar ele.",
+    bugHuntTouch: "Ele fugiu! Toque no bug vermelho para pegar ele.",
     miss1: "Quase! Ele é mais rápido do que parece.",
     miss2: "Desviou de novo… continue tentando!",
     miss3: "Ele está cansando. Agora é a sua chance!",
@@ -43,8 +45,12 @@ export const ptBR = {
   },
   about: {
     title: "Sobre Mim",
-    content:
-      "Prazer, me chamo Jean Pierre. Tenho 20 anos e moro na região metropolitana de Porto Alegre/RS. Sou uma pessoa comunicativa, apaixonada por tecnologia, música e por entender como as coisas funcionam. Hoje sou desenvolvedor iOS e tenho 2 anos de experiência na Apple Developer Academy | PUCRS, onde pude criar e publicar aplicativos na App Store, trabalhando em equipe e aplicando práticas alinhadas ao mercado de trabalho nos projetos. Atualmente, curso Análise e Desenvolvimento de Sistemas na PUCRS e Engenharia de Software na UNINTER. Minha curiosidade e vontade de aprender me impulsionam a novos desafios e a me aprimorar cada vez mais como futuro Engenheiro de Software. Estou animado para contribuir com minha energia e criatividade em novos times e projetos.",
+    // Text between ** is emphasized.
+    paragraphs: [
+      "Prazer, me chamo Jean Pierre. Tenho 20 anos e moro na região metropolitana de **Porto Alegre/RS**. Sou uma pessoa comunicativa, apaixonada por tecnologia, música e por entender como as coisas funcionam.",
+      "Hoje sou desenvolvedor iOS e tenho mais de 2 anos de experiência na **Apple Developer Academy | PUCRS**, onde pude criar e publicar aplicativos na App Store, trabalhando em equipe e aplicando práticas alinhadas ao mercado de trabalho nos projetos.",
+      "Atualmente, curso **Análise e Desenvolvimento de Sistemas na PUCRS** e **Engenharia de Software na UNINTER**. Minha curiosidade e vontade de aprender me impulsionam a novos desafios e a me aprimorar cada vez mais como futuro Engenheiro de Software. Estou animado para contribuir com minha energia e criatividade em novos times e projetos.",
+    ],
   },
   skillsSection: {
     title: "Habilidades",
@@ -128,6 +134,9 @@ export const ptBR = {
     title: "Vamos Conversar?",
     description: "Entre em contato comigo através das minhas redes:",
     email: "developerjeanpierre@gmail.com",
+    copyEmail: "Copiar e-mail",
+    emailCopied: "E-mail copiado",
+    copyFailed: "Não foi possível copiar",
   },
   meta: {
     title: "Jean Pierre — Desenvolvedor iOS",
@@ -136,7 +145,10 @@ export const ptBR = {
     catchBug: "Pegar o bug",
     previousRecommendation: "Recomendação anterior",
     nextRecommendation: "Próxima recomendação",
-    toggleLanguage: "Alternar idioma",
+    pauseRecommendations: "Pausar recomendações",
+    playRecommendations: "Retomar recomendações",
+    backToTop: "Voltar ao topo",
+    languageSwitch: "Idioma do site",
     sendEmail: "Enviar e-mail",
     visitLinkedin: "Visitar perfil no LinkedIn",
     visitGithub: "Visitar perfil no GitHub",

@@ -4,6 +4,7 @@ import { SkipForward } from "lucide-react";
 import { PREMIUM_EASE } from "../../constants/animation";
 import { useLanguage } from "../../i18n/LanguageContext";
 import type { Translation } from "../../i18n/translations";
+import { LanguageSwitch } from "../layout/LanguageSwitch";
 import { LumiIsland, type BuildState, type IslandPhase, type IslandPlacement } from "./LumiIsland";
 import { LooseBug } from "./LooseBug";
 
@@ -24,8 +25,8 @@ const FINISH_BUILD_TIME = 1400;
 // How long "Build Failed" and "Build Succeeded" stay before the conversation goes on.
 const BUILD_RESULT_TIME = 1600;
 // Below this width the header has no room for the island, so after the intro it docks at the bottom.
-const DOCK_BELOW_WIDTH = 640;
-const isPhone = () => window.innerWidth < DOCK_BELOW_WIDTH;
+const DOCK_BELOW_WIDTH = 1024;
+const docksAtBottom = () => window.innerWidth < DOCK_BELOW_WIDTH;
 // How long the island shows a section's name before resting again.
 const LIVE_TIME = 2400;
 
@@ -34,6 +35,7 @@ type MessageKey =
   | "runCall"
   | "bugCall"
   | "bugHunt"
+  | "bugHuntTouch"
   | "miss1"
   | "miss2"
   | "miss3"
@@ -90,12 +92,15 @@ function markAssistantSeen() {
  * to the top and the red bug runs loose for the visitor to catch (it escapes the first three
  * tries). Then the island comes back, the build succeeds, and the dark screen folds into the
  * island, showing the page (`onReveal`). "Skip" or Escape jumps straight to the page at any point.
+ * Without `playIntro` (a visitor who already saw it) the island is just there, resting.
  */
-export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
+export function LumiAssistant({ playIntro, onReveal }: { playIntro: boolean; onReveal: () => void }) {
   const { t } = useLanguage();
-  const [stage, setStage] = useState<Stage>("intro");
-  const [phase, setPhase] = useState<IslandPhase | "gone">("island");
-  const [placement, setPlacement] = useState<IslandPlacement>("center");
+  const [stage, setStage] = useState<Stage>(playIntro ? "intro" : "done");
+  const [phase, setPhase] = useState<IslandPhase | "gone">(playIntro ? "island" : "resting");
+  const [placement, setPlacement] = useState<IslandPlacement>(() =>
+    playIntro ? "center" : docksAtBottom() ? "bottom" : "top",
+  );
   const [messageKey, setMessageKey] = useState<MessageKey>("greeting");
   const [bug, setBug] = useState<BugState>("hidden");
   const [build, setBuild] = useState<BuildState>({ progress: 0, status: "running" });
@@ -190,7 +195,7 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
     clearTimers();
     setStage("game");
     moveTo("top");
-    say("bugHunt", MOVE_TIME);
+    say(window.matchMedia("(hover: hover)").matches ? "bugHunt" : "bugHuntTouch", MOVE_TIME);
     after(600, () => setBug("loose"));
   };
 
@@ -202,12 +207,15 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
     setStage("done");
     setAwaitingRun(false);
     onReveal();
-    setPlacement(isPhone() ? "bottom" : "top");
+    setPlacement(docksAtBottom() ? "bottom" : "top");
     setBug((current) => (current === "caught" ? current : "gone"));
     rest();
   };
 
   useEffect(() => {
+    if (!playIntro) {
+      return;
+    }
     markAssistantSeen();
     moveTo("center", INTRO_AT);
     const runCallAt = INTRO_AT + MOVE_TIME + readingTime(t.assistant.greeting);
@@ -217,7 +225,8 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
     after(runCallAt + AUTO_RUN_AFTER, run);
 
     const skipOnEscape = (event: KeyboardEvent) => {
-      if (event.key === "Enter" && awaitingRunRef.current) {
+      // On a button (like the language switch), Enter presses that button instead.
+      if (event.key === "Enter" && awaitingRunRef.current && !(event.target instanceof HTMLButtonElement)) {
         run();
       }
       if (event.key === "Escape") {
@@ -275,7 +284,7 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
             setLiveLabel(label);
             setPhase("live");
             clearTimeout(liveTimer);
-            // Only settles back if nothing else (like a click reopening the chat) took over.
+            // Only settles back if nothing else took over.
             liveTimer = window.setTimeout(() => {
               if (phaseRef.current === "live") {
                 setPhase("resting");
@@ -334,22 +343,8 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
     });
   };
 
-  const handleIslandClick = () => {
-    if (stage !== "done") {
-      return;
-    }
-    // On phones the docked island is a shortcut back to the top.
-    if (isPhone()) {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    if (phase === "resting" || phase === "live") {
-      say("greeting");
-      after(6000, rest);
-    } else {
-      rest();
-    }
-  };
+  // Docked at the bottom, the island is a shortcut back to the top; anywhere else it takes no clicks.
+  const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <>
@@ -369,7 +364,7 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
                 ? { label: t.assistant.run, hint: t.assistant.runHint, onClick: run }
                 : undefined
             }
-            onClick={handleIslandClick}
+            onClick={placement === "bottom" ? scrollToTop : undefined}
           />
         )}
       </AnimatePresence>
@@ -380,6 +375,26 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
           onCatch={handleCatch}
         />
       )}
+
+      {/* Right where the header has it, so it stays put when the page shows. The island covers
+          that corner of narrow screens during the bug hunt. */}
+      <AnimatePresence>
+        {stage !== "done" && !(stage === "game" && docksAtBottom()) && (
+          <motion.div
+            key="language"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: { delay: stage === "intro" ? 0.8 : 0, duration: 0.5 } }}
+            exit={{ opacity: 0, transition: { delay: stage === "game" ? 0 : 0.6, duration: 0.25 } }}
+            className="fixed top-0 inset-x-0 z-[61] pointer-events-none"
+          >
+            <div className="max-w-[88rem] mx-auto pr-4 lg:pr-6 h-16 sm:h-20 flex items-center justify-end">
+              <div className="pointer-events-auto">
+                <LanguageSwitch />
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {stage !== "done" && (
@@ -403,8 +418,8 @@ export function LumiAssistant({ onReveal }: { onReveal: () => void }) {
 
 /** The dark screen that hides the page during the intro. It leaves by folding into the island. */
 function IntroBackdrop() {
-  // Folds toward where the island will rest: the top, or the bottom on phones.
-  const origin = isPhone() ? "50% 100%" : "50% 0%";
+  // Folds toward where the island will rest: the top, or the bottom on narrow screens.
+  const origin = docksAtBottom() ? "50% 100%" : "50% 0%";
   return (
     <motion.div
       aria-hidden="true"

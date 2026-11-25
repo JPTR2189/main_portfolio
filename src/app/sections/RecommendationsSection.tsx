@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type TouchEvent } from "react";
 import { motion, useInView, useReducedMotion } from "motion/react";
-import { ArrowUpRight, ChevronLeft, ChevronRight, Linkedin } from "lucide-react";
+import { ArrowUpRight, ChevronLeft, ChevronRight, Linkedin, Pause, Play } from "lucide-react";
 import { PREMIUM_EASE } from "../constants/animation";
 import { useLanguage } from "../i18n/LanguageContext";
 import type { Translation } from "../i18n/translations/pt-BR";
@@ -18,9 +18,11 @@ const PHOTOS: Record<string, string> = {
 };
 
 /** How long each recommendation stays before the next one comes in. */
-const AUTOPLAY_MS = 10000;
+const AUTOPLAY_MS = 20000;
 /** Horizontal finger travel, in pixels, that counts as a swipe. */
 const SWIPE_THRESHOLD = 40;
+/** Finger travel, in pixels, up to which a touch is a tap and not a scroll. */
+const TAP_SLOP = 10;
 
 function RecommendationSlide({ recommendation, active }: { recommendation: Recommendation; active: boolean }) {
   const { t } = useLanguage();
@@ -46,7 +48,7 @@ function RecommendationSlide({ recommendation, active }: { recommendation: Recom
         ))}
       </blockquote>
       {t.recommendations.translatedNote && (
-        <p className="mt-4 text-xs italic text-[#737373]">{t.recommendations.translatedNote}</p>
+        <p className="mt-4 text-xs italic text-[#8C8C8C]">{t.recommendations.translatedNote}</p>
       )}
 
       <figcaption className="mt-auto pt-8 flex flex-col gap-7 sm:flex-row sm:items-center sm:justify-between sm:gap-6">
@@ -71,7 +73,7 @@ function RecommendationSlide({ recommendation, active }: { recommendation: Recom
             <p className="text-lg text-[#F5F5F5]" style={{ fontWeight: 600 }}>
               {name}
             </p>
-            <p className="mt-0.5 text-sm leading-snug text-[#737373]">{headline}</p>
+            <p className="mt-0.5 text-sm leading-snug text-[#8C8C8C]">{headline}</p>
             <p className="mt-1 text-sm text-[#A3A3A3]">{relation}</p>
           </div>
         </div>
@@ -99,16 +101,18 @@ export function RecommendationsSection() {
   const items = t.recommendations.items;
   const [active, setActive] = useState(0);
   const [hovered, setHovered] = useState(false);
+  const [paused, setPaused] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
-  const inView = useInView(cardRef, { amount: 0.4 });
+  // Viewed once it crosses the middle of the screen, whatever its height; the count starts there.
+  const inView = useInView(cardRef, { margin: "-45% 0px -50% 0px" });
   const reducedMotion = useReducedMotion();
-  const touchStartX = useRef<number | null>(null);
+  const touchStart = useRef<{ x: number; y: number } | null>(null);
 
-  const playing = inView && !hovered && !reducedMotion;
+  const playing = inView && !hovered && !paused && !reducedMotion;
 
   const goTo = (index: number) => setActive((index + items.length) % items.length);
 
-  // Moves on every 10s while the card is on screen and not being read under the pointer;
+  // Moves on every 20s while the card is being viewed and not being read under the pointer;
   // any manual change restarts the count.
   useEffect(() => {
     if (!playing) {
@@ -119,17 +123,20 @@ export function RecommendationsSection() {
   }, [active, playing]);
 
   const handleTouchStart = (event: TouchEvent) => {
-    touchStartX.current = event.touches[0].clientX;
+    touchStart.current = { x: event.touches[0].clientX, y: event.touches[0].clientY };
   };
 
+  // A tap or a swipe means someone is reading, so it pauses; scrolling past the card doesn't.
   const handleTouchEnd = (event: TouchEvent) => {
-    if (touchStartX.current === null) return;
-    const distance = event.changedTouches[0].clientX - touchStartX.current;
-    touchStartX.current = null;
-    if (distance <= -SWIPE_THRESHOLD) {
-      goTo(active + 1);
-    } else if (distance >= SWIPE_THRESHOLD) {
-      goTo(active - 1);
+    if (touchStart.current === null) return;
+    const dx = event.changedTouches[0].clientX - touchStart.current.x;
+    const dy = event.changedTouches[0].clientY - touchStart.current.y;
+    touchStart.current = null;
+    if (Math.abs(dx) >= SWIPE_THRESHOLD && Math.abs(dx) > Math.abs(dy)) {
+      setPaused(true);
+      goTo(dx < 0 ? active + 1 : active - 1);
+    } else if (Math.hypot(dx, dy) <= TAP_SLOP) {
+      setPaused(true);
     }
   };
 
@@ -152,8 +159,8 @@ export function RecommendationsSection() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-60px" }}
         transition={{ duration: 0.7, ease: PREMIUM_EASE }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+        onPointerEnter={(event) => setHovered(event.pointerType === "mouse")}
+        onPointerLeave={() => setHovered(false)}
         onTouchStart={handleTouchStart}
         onTouchEnd={handleTouchEnd}
         className="relative overflow-hidden max-w-4xl mx-auto p-7 sm:p-10 lg:p-12 rounded-3xl bg-gradient-to-br from-[#171717] via-[#111111] to-[#0A0A0A] border border-[#262626]"
@@ -176,7 +183,7 @@ export function RecommendationsSection() {
         >
           <ChevronLeft size={18} />
         </button>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center">
           {items.map((recommendation, index) => (
             <button
               key={recommendation.name}
@@ -184,18 +191,23 @@ export function RecommendationsSection() {
               onClick={() => goTo(index)}
               aria-label={recommendation.name}
               aria-current={index === active}
-              className={`relative h-2 rounded-full overflow-hidden bg-[#404040] transition-all duration-300 ${index === active ? "w-10" : "w-2 hover:bg-[#525252]"}`}
+              // A small dot in a tall touch area.
+              className="group flex items-center justify-center min-w-6 h-11 px-1"
             >
-              {/* The active dot fills up as the next recommendation approaches. */}
-              {index === active && (
-                <motion.span
-                  key={`${active}-${playing}`}
-                  initial={{ width: playing ? "0%" : "100%" }}
-                  animate={{ width: "100%" }}
-                  transition={{ duration: playing ? AUTOPLAY_MS / 1000 : 0, ease: "linear" }}
-                  className="absolute inset-y-0 left-0 bg-[#FACC15]"
-                />
-              )}
+              <span
+                className={`relative h-2 rounded-full overflow-hidden bg-[#404040] transition-all duration-300 ${index === active ? "w-10" : "w-2 group-hover:bg-[#525252]"}`}
+              >
+                {/* The active dot fills up as the next recommendation approaches. */}
+                {index === active && (
+                  <motion.span
+                    key={`${active}-${playing}`}
+                    initial={{ width: playing ? "0%" : "100%" }}
+                    animate={{ width: "100%" }}
+                    transition={{ duration: playing ? AUTOPLAY_MS / 1000 : 0, ease: "linear" }}
+                    className="absolute inset-y-0 left-0 bg-[#FACC15]"
+                  />
+                )}
+              </span>
             </button>
           ))}
         </div>
@@ -207,6 +219,16 @@ export function RecommendationsSection() {
         >
           <ChevronRight size={18} />
         </button>
+        {!reducedMotion && (
+          <button
+            type="button"
+            onClick={() => setPaused((current) => !current)}
+            aria-label={paused ? t.a11y.playRecommendations : t.a11y.pauseRecommendations}
+            className="flex p-3 sm:p-2 rounded-full border border-[#262626] text-[#A3A3A3] hover:text-[#F5F5F5] hover:border-[#404040] transition-colors duration-300"
+          >
+            {paused ? <Play size={18} /> : <Pause size={18} />}
+          </button>
+        )}
       </div>
     </section>
   );
