@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { Check, Copy, Github, Linkedin, Mail } from "lucide-react";
 import { PREMIUM_EASE } from "../constants/animation";
 import { SOCIAL_LINKS } from "../constants/links";
@@ -26,11 +26,7 @@ export function ContactSection() {
     }
   };
 
-  const copyLabel = {
-    idle: t.contact.copyEmail,
-    copied: t.contact.emailCopied,
-    failed: t.contact.copyFailed,
-  }[copyState];
+  const copyMessage = copyState === "failed" ? t.contact.copyFailed : t.contact.emailCopied;
 
   return (
     <section id="contact" className="py-14 sm:py-32 scroll-mt-16 sm:scroll-mt-0 px-6 lg:px-12 max-w-7xl mx-auto">
@@ -52,25 +48,49 @@ export function ContactSection() {
             {t.contact.description}
           </p>
           <div className="flex flex-col gap-3 sm:gap-6">
-            <div className="flex flex-col sm:flex-row sm:flex-wrap gap-3 sm:gap-4">
+            {/* On phones the copy icon is the end of the e-mail pill; on wider screens, a circle beside it. */}
+            <div className="flex sm:items-center sm:gap-4 w-full sm:w-fit">
               <a
                 href={`mailto:${t.contact.email}`}
-                className="inline-flex items-center gap-2 sm:gap-3 px-4 min-[380px]:px-5 sm:px-8 py-4 border-2 border-transparent text-[13px] min-[380px]:text-sm sm:text-base leading-6 bg-[#FACC15] text-[#0A0A0A] rounded-full hover:bg-[#FDE047] transition-all duration-300 w-full sm:w-fit justify-center"
+                className="flex-1 min-w-0 inline-flex items-center justify-center gap-2 sm:gap-3 pl-4 pr-2 sm:px-8 py-4 sm:border-2 border-transparent text-[12px] min-[375px]:text-[13px] sm:text-base leading-6 bg-[#FACC15] text-[#0A0A0A] rounded-l-full sm:rounded-full hover:bg-[#FDE047] transition-all duration-300"
                 style={{ fontWeight: 500 }}
                 aria-label={t.a11y.sendEmail}
               >
-                <Mail size={20} className="shrink-0" />
-                <span className="[overflow-wrap:anywhere]">{t.contact.email}</span>
+                <Mail size={20} className="hidden sm:block shrink-0" />
+                {/* Where it doesn't fit on one line, it breaks before the @. */}
+                <span className="[overflow-wrap:anywhere]">
+                  {t.contact.email.split("@")[0]}
+                  <wbr />@{t.contact.email.split("@")[1]}
+                </span>
               </a>
-              <button
-                type="button"
-                onClick={copyEmail}
-                className="inline-flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-8 py-4 bg-transparent border-2 border-[#262626] text-[#F5F5F5] rounded-full hover:border-[#FACC15] hover:text-[#FACC15] transition-all duration-300"
-                style={{ fontWeight: 500 }}
-              >
-                {copyState === "copied" ? <Check size={20} className="shrink-0 text-[#4ADE80]" /> : <Copy size={20} className="shrink-0" />}
-                <span aria-live="polite">{copyLabel}</span>
-              </button>
+              <div className="relative shrink-0 flex">
+                <button
+                  type="button"
+                  onClick={copyEmail}
+                  aria-label={t.contact.copyEmail}
+                  title={t.contact.copyEmail}
+                  className="flex items-center justify-center w-13 sm:w-[60px] sm:h-[60px] rounded-r-full sm:rounded-full bg-[#FACC15] sm:bg-transparent border-l sm:border-2 border-[#0A0A0A]/20 sm:border-[#262626] text-[#0A0A0A] sm:text-[#F5F5F5] hover:bg-[#FDE047] sm:hover:bg-transparent sm:hover:border-[#FACC15] sm:hover:text-[#FACC15] active:scale-[0.97] transition-all duration-300"
+                >
+                  {copyState === "copied" ? <Check size={20} /> : <Copy size={20} />}
+                </button>
+                <span role="status" className="absolute bottom-full right-0 sm:right-auto sm:left-1/2 sm:-translate-x-1/2 mb-2 pointer-events-none">
+                  <AnimatePresence>
+                    {copyState !== "idle" && (
+                      <motion.span
+                        key={copyState}
+                        initial={{ opacity: 0, y: 6, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 6, scale: 0.96 }}
+                        transition={{ duration: 0.25, ease: PREMIUM_EASE }}
+                        className="block px-3 py-1.5 rounded-lg bg-[#F5F5F5] text-sm text-[#0A0A0A] whitespace-nowrap"
+                        style={{ fontWeight: 500 }}
+                      >
+                        {copyMessage}
+                      </motion.span>
+                    )}
+                  </AnimatePresence>
+                </span>
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-3 sm:flex sm:flex-wrap sm:gap-4 sm:items-center">
               <a
